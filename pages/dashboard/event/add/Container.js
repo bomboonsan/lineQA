@@ -13,6 +13,9 @@ import EventSetup from './EventSetup';
 import { useRecoilState } from 'recoil';
 import {stateEvent} from '../../../../app/state/stateEvent'
 
+import {SSRProvider} from 'react-aria'
+
+
 export default function Container({ Component, pageProps }) {
 
   const [globalEvent, setGlobalEvent] = useRecoilState(stateEvent)
@@ -216,6 +219,7 @@ export default function Container({ Component, pageProps }) {
   }
 
   return (
+    <SSRProvider>
       <main className="mx-auto max-w-2xl">
         <div className='text-center mb-4'>
           <ul className="steps">
@@ -324,5 +328,6 @@ export default function Container({ Component, pageProps }) {
         </div>
           
       </main>
+      </SSRProvider>
   )
 }

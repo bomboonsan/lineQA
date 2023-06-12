@@ -11,8 +11,6 @@ import Result from './result'
 // sweetalert2
 import Swal from 'sweetalert2'
 
-// LINE LIFF
-import liff from '@line/liff';
 
 export default function Content( {pageData} ) {
     // Recoil
@@ -72,6 +70,19 @@ export default function Content( {pageData} ) {
 
 
     // }, []);
+
+    // START LINE LIFF NEW
+    // useEffect(async () => {
+    //     const liff = (await import('@line/liff')).default
+    //     try {
+    //       await liff.init({ liffId });
+    //     } catch (error) {
+    //       console.error('liff init error', error.message)
+    //     }
+    //     if (!liff.isLoggedIn()) {
+    //       liff.login();
+    //     }
+    // })
 
     return (
         <>

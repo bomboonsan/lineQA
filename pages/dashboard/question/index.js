@@ -103,7 +103,7 @@ export default function Dashboard() {
                   <Col css={{ width: "auto" }}>
                     <Tooltip content="แก้ไขคำถาม">
                       <Link href={`/dashboard/question/edit/${value._id}`}>
-                        <EditIcon size={20} fill="#979797" />
+                        EDIT
                       </Link>
                     </Tooltip>
                   </Col>

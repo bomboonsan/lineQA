@@ -1,4 +1,4 @@
-import Layout from '../template/layout';
+import Layout from '../../../components/dashboard/template/layout';
 import Image from 'next/image'
 import Link from 'next/link';
 import { useEffect, useState } from 'react';

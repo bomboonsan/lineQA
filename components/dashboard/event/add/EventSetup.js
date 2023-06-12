@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button , Modal , Text , Input , Textarea , Table , Tooltip , Row, Col , Checkbox } from "@nextui-org/react";
 
 import { useRecoilState } from 'recoil';
-import {stateEvent} from '../../../../app/state/stateEvent'
+import {stateEvent} from '../../../../state/stateEvent'
 
 export default function EventSetup() {
   // Recoil

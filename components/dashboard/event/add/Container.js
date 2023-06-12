@@ -11,7 +11,7 @@ import ResultGenerate from './ResultGenerate';
 import EventSetup from './EventSetup';
 
 import { useRecoilState } from 'recoil';
-import {stateEvent} from '../../../../app/state/stateEvent'
+import {stateEvent} from '../../../../state/stateEvent'
 
 import {SSRProvider} from 'react-aria'
 

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Textarea , Input , Switch , Tooltip , Radio } from "@nextui-org/react";
 
 import { useRecoilState } from 'recoil';
-import {stateEvent} from '../../../../app/state/stateEvent'
+import {stateEvent} from '../../../../state/stateEvent'
 
 export default function ResultGenerate( props ) {
   const [currentResult, setCurrentResult] = useState(props.countResult);

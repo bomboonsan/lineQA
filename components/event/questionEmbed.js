@@ -3,8 +3,8 @@ import { useState, useEffect , useMemo } from 'react';
 import Image from 'next/image'
 
 import { useRecoilState } from 'recoil';
-import {stateUser} from '../../app/state/stateUser'
-import {stateAnswer} from '../../app/state/stateAnswer'
+import {stateUser} from '../../state/stateUser'
+import {stateAnswer} from '../../state/stateAnswer'
 
 // Components FOR Dev Module
 

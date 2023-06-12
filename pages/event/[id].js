@@ -9,7 +9,7 @@ import { Container , Input , Button , Tooltip , Link , Badge } from "@nextui-org
 
 import { RecoilRoot } from 'recoil';
 
-import ContainerPage from './Container'
+import ContainerPage from '../../components/event/Container'
 
 
 export default function EventId() {

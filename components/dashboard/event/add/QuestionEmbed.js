@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Textarea , Input , Switch , Tooltip } from "@nextui-org/react";
 
 import { useRecoilState } from 'recoil';
-import {stateEvent} from '../../../../app/state/stateEvent'
+import {stateEvent} from '../../../../state/stateEvent'
 
 export default function QuestionText( props ) {
   // console.log('ตอนนี้กำลังอยู่ที่คำถามที่ index array = '+props.countQuestion)

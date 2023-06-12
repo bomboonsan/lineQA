@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image'
 
 import { useRecoilState } from 'recoil';
-import {stateUser} from '../../app/state/stateUser'
+import {stateUser} from '../../state/stateUser'
 
 // Components
 import QuestionGroup from './questionGroup'

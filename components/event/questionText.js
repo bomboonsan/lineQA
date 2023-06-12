@@ -3,20 +3,11 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image'
 
 import { useRecoilState } from 'recoil';
-import {stateUser} from '../../app/state/stateUser'
-import {stateAnswer} from '../../app/state/stateAnswer'
+import {stateUser} from '../../state/stateUser'
+import {stateAnswer} from '../../state/stateAnswer'
 
-// Components FOR Dev Module
 
 export default function Mockup({ questionData , questionIndex }) {
-  const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
-  
-
-  const [answerImages, setAnswerImages] = useState([]);
-  useEffect(() => {
-    const prefixedImages = {...questionData.answerImg};
-    setAnswerImages(prefixedImages) // รูปภาพคำตอบ []
-  }, [questionData]);
 
   const [globolAnswer, setGlobolAnswer] = useRecoilState(stateAnswer)
 
@@ -45,21 +36,13 @@ export default function Mockup({ questionData , questionIndex }) {
   }, [dataSelectAnswer]);
 
   return (
-      <main className="">
+    <main className="">
         <header className='px-3 mb-3'>
           <h1 className='text-4xl font-bold mb-4'>Campaign name</h1>
           <p className='text-lg'>{questionData.title} <small>({questionData.point})</small></p>
         </header>
-        <figure className='mb-5'>
-            <Image
-                className='w-full'
-                src={prefixUrl+questionData.questionImage}
-                alt="Mockup"
-                width={800}
-                height={800}
-            />
-        </figure>
-        <section className='p-3'>            
+        <section className='p-3'>
+            
             {answers && answers.map((item, index) => (
               
               <div key={index} className="answer-box">            
@@ -69,30 +52,27 @@ export default function Mockup({ questionData , questionIndex }) {
                   id={`Answer_${index}`} // Dynamically set the id using index
                   value={index}
                   onChange={(event) => handleSelectAnswer(event, index)} 
-                /> 
+                />  
                 <label 
                   className="form-check-label" 
                   htmlFor={`Answer_${index}`} // Dynamically set the htmlFor using index
                 >
                   <div className='flex flex-wrap'>
-                    <div className='basis-2/3'>
+                    <div className='basis-full'>
                       <span className='ms-2'>{item}</span>
-                    </div>
-                    <div className='basis-1/3'>
-                      <Image
-                        src={prefixUrl+answerImages[index]}
-                        alt="Mockup"
-                        width={300}
-                        height={300}
-                      />
                     </div>
                   </div>
                 </label>
-              </div> 
+              </div>
               
             ))}
+            {/* <div className='mt-5'>   
+              <button className="btn btn-block btn-primary text-xl text-white" onClick={handleSubmit}>
+                ถัดไป
+              </button>
+            </div>  */}
           </section>
-      </main>
+    </main>
     
   )
 }

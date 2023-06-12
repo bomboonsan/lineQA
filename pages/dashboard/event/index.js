@@ -6,8 +6,6 @@ import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 
 import { Button , Modal , Text , Table , Tooltip , Row, Col } from "@nextui-org/react";
-import { EditIcon } from "../components/EditIcon";
-import { DeleteIcon } from "../components/DeleteIcon";
 
 export default function Dashboard() {
   const [data, setData] = useState([]);

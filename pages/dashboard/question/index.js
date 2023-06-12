@@ -4,8 +4,6 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { Button , Modal , Text , Table , Tooltip , Row, Col } from "@nextui-org/react";
-import { EditIcon } from "../components/EditIcon";
-import { DeleteIcon } from "../components/DeleteIcon";
 
 import QuestionImage from '../components/QuestionImage';
 import QuestionText from '../components/QuestionText';

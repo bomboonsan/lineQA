@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  // color: rgb(var(--foreground-rgb));
+  color: #333;
+  background-color: #ddd;
+  font-family: 'Noto Sans Thai', sans-serif;
+}
+
+#appWrap {
+  @apply mx-auto bg-white max-w-xl min-h-screen overflow-x-hidden;
+}
+.topBar {
+  @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500;
+  @apply w-full h-1 mb-3;
+  content: '';
+}
+
+.answer-box {
+  @apply border border-[#111] p-2 mb-3 last:mb-0;
+  @apply flex flex-wrap items-start;
+  label {
+    @apply ms-2 flex-auto;
+  }
+  input {
+    @apply mt-1 flex-initial;
+  }
+}
+
+.result-box {
+  @apply border border-[#111] rounded-lg p-4;
+}
+
+.render-embed {
+  iframe {
+    @apply w-full h-auto aspect-video;
+  }
+}
+
+// Backend
+
+
+.box-widget {
+  @apply p-3 border border-neutral-300/40 shadow-lg rounded-md mb-4;
+}
+
+.control-widget {
+  @apply p-2 border border-neutral-300/40 shadow-lg rounded mb-4;
+}
+
+.d-none {
+  display: none;
+}
+.animation-fadeIn {
+  animation: fadeIn .5s linear;
+}
+@keyframes fadeIn{
+  0%{
+    opacity: 0;
+  }
+  40%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}

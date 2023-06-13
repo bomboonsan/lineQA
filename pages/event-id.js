@@ -55,7 +55,7 @@ export default function EventId() {
 
   return (
     <>
-    {data && id !== undefined &&
+    {data &&
     
     <div id='appWrap'>
       <div className='topBar'></div>
@@ -69,28 +69,13 @@ export default function EventId() {
         />
       </header>       
       <main className="">
+        {id !== undefined ? (
           <ContainerPage pageData={data} />
-      </main>    
-    </div>
-
-    }
-
-
-    {data && contest !== undefined &&
-    
-    <div id='appWrap'>
-      <div className='topBar'></div>
-      <header className='mb-3 px-4'>
-        <Image 
-          className='w-1/3 h-auto'
-          width={384} 
-          height={86} 
-          src='/images/logo.png'
-          alt='LOGO'
-        />
-      </header>       
-      <main className="">
+        ) : (
           <ContainerPageContest pageData={data} />
+        )
+          
+        }
       </main>    
     </div>
 

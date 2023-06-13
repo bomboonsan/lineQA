@@ -66,6 +66,8 @@ export default function Content( {pageData} ) {
             const profile = await liff.getProfile();
             const { displayName, pictureUrl, email , userId  } = profile;
 
+            console.log(profile)
+
             const newStateUser = {...dataUser};
             newStateUser.accesstoken = userId
             newStateUser.displayName = displayName

@@ -15,43 +15,48 @@ import ContainerPage from '../components/event/Container'
 export default function EventId() {
   const router = useRouter()
   const id = router.query.id;
+  const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
+  const [data, setData] = useState({});
 
-  // START LINE LIFF NEW
-  useEffect(async () => {
-      const newStateUser = {...dataUser};
-      
-      const liff = (await import('@line/liff')).default
-      try {
-          await liff.init({ liffId: '1661407578-X6ro31ow', });
-
-
-          const profile = await liff.getProfile();
-          const { displayName, pictureUrl, email , userId  } = profile;
-
-          newStateUser.accesstoken = userId
-          newStateUser.displayName = displayName
-          newStateUser.pictureUrl = pictureUrl
-          newStateUser.email = email
-          setDataUser(newStateUser)
-
-          // Redirect
-          if (id !== undefined && userId ) {
-            router.push(`/event/${id}`)
-          }
-
-      } catch (error) {
-      console.error('liff init error', error.message)
-      }
-      if (!liff.isLoggedIn()) {
-      liff.login();
-      }
-
-  }, [])
+  useEffect(() => {
+    if (id !== undefined ) {
+      fetchData();
+    }
+  }, [id]);
+  
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`https://api.bomboonsan.com/event/id/${id}`);
+      const jsonData = await response.json();
+      setData(jsonData);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  // console.log(data)
 
 
   return (
     <>
+    {data &&   
+    
+    <div id='appWrap'>
+      <div className='topBar'></div>
+      <header className='mb-3 px-4'>
+        <Image 
+          className='w-1/3 h-auto'
+          width={384} 
+          height={86} 
+          src='/images/logo.png'
+          alt='LOGO'
+        />
+      </header>       
+      <main className="">
+          <ContainerPage pageData={data} />
+      </main>    
+    </div>
 
+    }
     </>
   )
 }

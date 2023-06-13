@@ -46,12 +46,19 @@ export default function EventId() {
     <div id='appWrap'>
       <div className='topBar'></div>
       <header className='mb-3 px-4'>
-        <Image 
+        {/* <Image 
           className='w-1/3 h-auto'
           width={384} 
           height={86} 
           src='/images/logo.png'
           alt='LOGO'
+        /> */}
+        <img
+        className='w-1/3 h-auto'
+        width={384} 
+        height={86} 
+        src='/images/logo.png'
+        alt='LOGO'
         />
       </header>       
       <main className="">

@@ -51,7 +51,7 @@ export default function Mockup({ questionData , questionIndex }) {
           <p className='text-lg'>{questionData.title} <small>({questionData.point})</small></p>
         </header>
         <figure className='mb-5'>
-            <Image
+            <img
                 className='w-full'
                 src={prefixUrl+questionData.questionImage}
                 alt="Mockup"
@@ -79,7 +79,7 @@ export default function Mockup({ questionData , questionIndex }) {
                       <span className='ms-2'>{item}</span>
                     </div>
                     <div className='basis-1/3'>
-                      <Image
+                      <img
                         src={prefixUrl+answerImages[index]}
                         alt="Mockup"
                         width={300}

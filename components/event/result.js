@@ -83,7 +83,7 @@ export default function Result( {pageData} ) {
                 {pageData.results[indexResult].resultText}
               </p>
               <div className='mt-4'>
-                <Image
+                <img
                         src={prefixUrl+pageData.results[indexResult].resultImageUrl}
                         alt="Mockup"
                         className='block mx-auto'

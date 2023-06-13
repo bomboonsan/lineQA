@@ -106,7 +106,7 @@ export default function Content( {pageData} ) {
                     </h3>
                 </div>
                 <div>
-                <Image 
+                <img 
                 className='w-full h-auto'
                 width={700} 
                 height={700} 

@@ -66,12 +66,12 @@ export default function Content( {pageData} ) {
             const profile = await liff.getProfile();
             const { displayName, pictureUrl, email , userId  } = profile;
 
-            // const newStateUser = {...dataUser};
-            // newStateUser.accesstoken = userId
-            // newStateUser.displayName = displayName
-            // newStateUser.pictureUrl = pictureUrl
-            // newStateUser.email = email
-            // setDataUser(newStateUser)
+            const newStateUser = {...dataUser};
+            newStateUser.accesstoken = userId
+            newStateUser.displayName = displayName
+            newStateUser.pictureUrl = pictureUrl
+            newStateUser.email = email
+            setDataUser(newStateUser)
 
         } catch (error) {
         console.error('liff init error', error.message)

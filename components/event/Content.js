@@ -71,7 +71,7 @@ export default function Content( {pageData} ) {
             newStateUser.displayName = displayName
             newStateUser.pictureUrl = pictureUrl
             newStateUser.email = email
-            setDataUser(newStateUser)
+            setGlobalUser(newStateUser)
 
         } catch (error) {
         console.error('liff init error', error.message)

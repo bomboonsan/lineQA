@@ -71,6 +71,9 @@ export default function Content( {pageData} ) {
 
     // START LINE LIFF NEW
     useEffect(async () => {
+        const newStateUser = {...dataUser};
+
+
         const liff = (await import('@line/liff')).default
         try {
             await liff.init({ liffId: '1661407578-X6ro31ow', });
@@ -78,9 +81,14 @@ export default function Content( {pageData} ) {
 
             const profile = await liff.getProfile();
             const { displayName, pictureUrl, email } = profile;
-            console.log('User Name:', displayName);
-            console.log('Picture URL:', pictureUrl);
-            console.log('Email:', email);
+
+            console.log('profile')
+            console.log(profile)
+
+            newStateUser.displayName = displayName
+            newStateUser.pictureUrl = pictureUrl
+            newStateUser.email = email
+            setDataUser(newStateUser)
 
         } catch (error) {
         console.error('liff init error', error.message)

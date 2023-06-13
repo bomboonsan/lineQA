@@ -48,52 +48,38 @@ export default function Content( {pageData} ) {
         }
     }
 
-    // START LINE LIFF DATA
-    // useEffect(() => {
-    //     async function initializeLiff() {
-    //       try {
-    //         await liff.init({ liffId: 'YOUR_LIFF_ID' }); // Replace with your LIFF ID
-    //         if (!liff.isLoggedIn()) {
-    //           liff.login();
-    //         } else {
-    //           const profile = await liff.getProfile();
-    //           const { displayName, pictureUrl, email } = profile;
-    //           console.log('User Name:', displayName);
-    //           console.log('Picture URL:', pictureUrl);
-    //           console.log('Email:', email);
-    //         }
-    //       } catch (error) {
-    //         console.error('LIFF initialization failed', error);
-    //       }
-    //     }    
-    //     initializeLiff();
-    // }, []);
-
     // START LINE LIFF NEW
-    // useEffect(async () => {
-        
-    //     const liff = (await import('@line/liff')).default
-    //     try {
-    //         await liff.init({ liffId: '1661407578-X6ro31ow', });
+    useEffect(() => {
+        const newStateUser = {...dataUser};
+        if (newStateUser.pictureUrl == null) {
+            initializeLiff()
+        }
+
+    }, [])
+
+    const initializeLiff = async() => {
+        const liff = (await import('@line/liff')).default
+        try {
+            await liff.init({ liffId: '1661407578-X6ro31ow', });
 
 
-    //         const profile = await liff.getProfile();
-    //         const { displayName, pictureUrl, email , userId  } = profile;
+            const profile = await liff.getProfile();
+            const { displayName, pictureUrl, email , userId  } = profile;
 
-    //         const newStateUser = {...dataUser};
-    //         newStateUser.accesstoken = userId
-    //         newStateUser.displayName = displayName
-    //         newStateUser.pictureUrl = pictureUrl
-    //         newStateUser.email = email
-    //         setDataUser(newStateUser)
+            // const newStateUser = {...dataUser};
+            // newStateUser.accesstoken = userId
+            // newStateUser.displayName = displayName
+            // newStateUser.pictureUrl = pictureUrl
+            // newStateUser.email = email
+            // setDataUser(newStateUser)
 
-    //     } catch (error) {
-    //     console.error('liff init error', error.message)
-    //     }
-    //     if (!liff.isLoggedIn()) {
-    //     liff.login();
-    //     }
-    // }, [])
+        } catch (error) {
+        console.error('liff init error', error.message)
+        }
+        if (!liff.isLoggedIn()) {
+        liff.login();
+        }
+    }
 
     return (
         <>

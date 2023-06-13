@@ -9,13 +9,12 @@ import { Container , Input , Button , Tooltip , Link , Badge } from "@nextui-org
 
 import { RecoilRoot } from 'recoil';
 
-import WelcomeContainer from '../components/event/WelcomeContainer'
+import ContainerPage from '../components/event/Container'
 
 
 export default function EventId() {
   const router = useRouter()
   const id = router.query.id;
-
   const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
   const [data, setData] = useState({});
 
@@ -34,6 +33,8 @@ export default function EventId() {
       console.error('Error:', error);
     }
   };
+  // console.log(data)
+
 
   return (
     <>
@@ -51,7 +52,7 @@ export default function EventId() {
         />
       </header>       
       <main className="">
-          <WelcomeContainer pageData={data} />
+          <ContainerPage pageData={data} />
       </main>    
     </div>
 

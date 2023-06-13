@@ -7,7 +7,7 @@ const stateUser = atom({
         onPage: 'welcome',
         accesstoken: 'xxxxxxxxxxxxxxxxxxxx',
         displayName: 'bom',
-        pictureUrl: 'boonsan',
+        pictureUrl: null,
         email: 'bom@bomb.com',
     }
 })

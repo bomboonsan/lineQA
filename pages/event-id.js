@@ -36,9 +36,6 @@ export default function EventId() {
   // console.log(data)
 
 
-
-
-
   return (
     <>
     {data &&   

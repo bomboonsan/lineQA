@@ -15,7 +15,6 @@ import ContainerPage from '../components/event/Container'
 export default function EventId() {
   const router = useRouter()
   const id = router.query.id;
-  // const { id } = router.query;
   const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
   const [data, setData] = useState({});
 

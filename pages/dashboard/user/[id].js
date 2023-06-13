@@ -122,7 +122,7 @@ export default function Dashboard() {
                 {/* CARD */}
                 {dataContest && dataContest.map((item,index) => (
                   <div key={index} className="card card-compact w-96 bg-base-100 shadow-xl">
-                    <figure><img src={prefixUrl+item.fileUrl} alt="" /></figure>
+                    <figure><img src={prefixUrl+item.fileUrl} alt="" className='w-100 h-auto aspect-video object-cover' /></figure>
                     <div className="card-body">
                       <h2 className="card-title">Event : {item.title}</h2>
                     </div>

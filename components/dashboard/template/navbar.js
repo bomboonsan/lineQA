@@ -37,6 +37,7 @@ export default function Layout({ children }) {
         </Navbar.Brand>
         <Navbar.Content hideIn="xs">
           <Navbar.Link href="/dashboard/event">Event</Navbar.Link>
+          <Navbar.Link href="/dashboard/contest">Contest</Navbar.Link>
           <Navbar.Link href="/dashboard/user">User</Navbar.Link>
         </Navbar.Content>
       </Navbar>

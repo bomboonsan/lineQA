@@ -175,7 +175,8 @@ export default function QuestionGroup( {pageData} ) {
     
         const bodyJson = {
           "displayName" : globolUser.displayName,
-          "pictureUrl" : null,
+          "pictureUrl" : globolUser.pictureUrl,
+          "email" : globolUser.email,
           "eventData" : listEventData,
         }
         try {

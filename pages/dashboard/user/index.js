@@ -77,10 +77,10 @@ export default function Dashboard() {
               <Table.Cell>
                 <img
                   className='w-1/3 h-auto'
-                  width={384} 
-                  height={86} 
+                  width={50} 
+                  height={50} 
                   src={prefixUrl+value.pictureUrl} 
-                  alt='LOGO'
+                  alt='AVATAR'
                 />
               </Table.Cell>
               <Table.Cell>

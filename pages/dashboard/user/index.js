@@ -75,7 +75,13 @@ export default function Dashboard() {
           {data.map((value, index) => (
             <Table.Row key={index}>
               <Table.Cell>
-                {value.campaign}
+                <img
+                  className='w-1/3 h-auto'
+                  width={384} 
+                  height={86} 
+                  src={prefixUrl+value.pictureUrl} 
+                  alt='LOGO'
+                />
               </Table.Cell>
               <Table.Cell>
                 {value.displayName}

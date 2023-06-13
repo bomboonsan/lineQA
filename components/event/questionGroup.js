@@ -126,11 +126,11 @@ export default function QuestionGroup( {pageData} ) {
 
     // SEND DATA API
     const submitNewUser = async () => {
-    
         const bodyJson = {
           "accesstoken" : globolUser.accesstoken,
           "displayName" : globolUser.displayName,
-          "pictureUrl" : null,
+          "pictureUrl" : globolUser.pictureUrl,
+          "email" : globolUser.email,
           "eventData" : [{
             "campaign" : pageData.campaign,
             "title" : pageData.title,

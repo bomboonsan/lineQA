@@ -69,34 +69,7 @@ export default function Content( {pageData} ) {
     //     initializeLiff();
     // }, []);
 
-    // START LINE LIFF NEW
-    useEffect(async () => {
-        const newStateUser = {...dataUser};
-
-
-        const liff = (await import('@line/liff')).default
-        try {
-            await liff.init({ liffId: '1661407578-X6ro31ow', });
-
-
-            const profile = await liff.getProfile();
-            const { displayName, pictureUrl, email } = profile;
-
-            console.log('profile')
-            console.log(profile)
-
-            newStateUser.displayName = displayName
-            newStateUser.pictureUrl = pictureUrl
-            newStateUser.email = email
-            setDataUser(newStateUser)
-
-        } catch (error) {
-        console.error('liff init error', error.message)
-        }
-        if (!liff.isLoggedIn()) {
-        liff.login();
-        }
-    }, [])
+    
 
     return (
         <>

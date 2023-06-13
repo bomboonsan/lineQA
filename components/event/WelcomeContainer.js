@@ -3,14 +3,14 @@ import Image from 'next/image'
 
 import { RecoilRoot } from 'recoil';
 
-import Content from './Content'
+import WelcomeContent from './WelcomeContent'
 
 export default function ContainerPage( { pageData } ) {
     
     return (
         <>
             <RecoilRoot>
-                <Content pageData={pageData} />
+                <WelcomeContent pageData={pageData} />
             </RecoilRoot>
         </>
     )

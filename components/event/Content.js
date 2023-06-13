@@ -51,11 +51,11 @@ export default function Content( {pageData} ) {
     // START LINE LIFF NEW
     useEffect(() => {
         const newStateUser = {...dataUser};
-        if (newStateUser.pictureUrl == null) {
+        if (newStateUser.displayName == null) {
             initializeLiff()
         }
 
-    }, [])
+    }, [dataUser])
 
     const initializeLiff = async() => {
         const liff = (await import('@line/liff')).default

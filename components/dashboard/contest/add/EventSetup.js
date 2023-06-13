@@ -4,46 +4,49 @@ import { useEffect, useState } from 'react';
 import { Button , Modal , Text , Input , Textarea , Table , Tooltip , Row, Col , Checkbox } from "@nextui-org/react";
 
 import { useRecoilState } from 'recoil';
-import {stateEvent} from '../../../../state/stateEvent'
+import {stateContest} from '../../../../state/stateContest'
+
 
 export default function EventSetup() {
   // Recoil
-  const [globalEvent, setGlobalEvent] = useRecoilState(stateEvent)
+  const [globalContest, setGlobalContest] = useRecoilState(stateContest)
   useEffect(() => {
-    setDataevent(globalEvent)
-  }, [globalEvent]);  
+    setDataevent(globalContest)
+  }, [globalContest]);
+  console.log(globalContest) 
 
   // prefix
   const [prefixImg, setPrefixImg] = useState('https://api.bomboonsan.com/');
-  // useState
+    // useState
+  const [longText, setLongText] = useState('');
   const [dataEvent, setDataevent] = useState({});
   const campaignChange = (e) => {
     // Set state to Globol
     const newValue = e.target.value;
-    const newGlobalEvent = {...globalEvent}
-    newGlobalEvent.campaign = newValue;
-    setGlobalEvent(newGlobalEvent)
+    const newGlobalContest = {...globalContest}
+    newGlobalContest.campaign = newValue;
+    setGlobalContest(newGlobalContest)
   }
   const descriptionChange = (e) => {
     // Set state to Globol
     const newValue = e.target.value;
-    const newGlobalEvent = {...globalEvent}
-    newGlobalEvent.description = newValue;
-    setGlobalEvent(newGlobalEvent)
+    const newGlobalContest = {...globalContest}
+    newGlobalContest.description = newValue;
+    setGlobalContest(newGlobalContest)
   }
   const titleChange = (e) => {
     // Set state to Globol
     const newValue = e.target.value;
-    const newGlobalEvent = {...globalEvent}
-    newGlobalEvent.title = newValue;
-    setGlobalEvent(newGlobalEvent)
+    const newGlobalContest = {...globalContest}
+    newGlobalContest.title = newValue;
+    setGlobalContest(newGlobalContest)
   }
   const expirationChange = (e) => {
     // Set state to Globol
     const newValue = e.target.value;
-    const newGlobalEvent = {...globalEvent}
-    newGlobalEvent.expiration = newValue;
-    setGlobalEvent(newGlobalEvent)
+    const newGlobalContest = {...globalContest}
+    newGlobalContest.expiration = newValue;
+    setGlobalContest(newGlobalContest)
   }
 
   // Image Thumbnail
@@ -65,9 +68,9 @@ export default function EventSetup() {
       // Set Data
       setUrlThumbnail(data[0].path)
 
-      const newGlobalEvent = {...globalEvent}
-      newGlobalEvent.thumbnail = data[0].path;
-      setGlobalEvent(newGlobalEvent)
+      const newGlobalContest = {...globalContest}
+      newGlobalContest.thumbnail = data[0].path;
+      setGlobalContest(newGlobalContest)
 
       console.log('URL image:', data[0].path);
     } catch (error) {
@@ -75,22 +78,57 @@ export default function EventSetup() {
     }
   };
 
-  // nextStep > save state to GlobolState
-  const handleSubmitSetup = () => {
-    const newGlobalEvent = {...globalEvent}
-    // SETSTATE
-    newGlobalEvent.campaign = dataEvent.campaign
-    newGlobalEvent.description = dataEvent.description
-    newGlobalEvent.title = dataEvent.title
-    newGlobalEvent.expiration = dataEvent.expiration
-    // save
-    setGlobalEvent(newGlobalEvent)
+  const removeImage = async (url) => {
+    url = url.replace('images/','')
+    try {
+      const response = await fetch(`https://api.bomboonsan.com/upload/image/delete/${url}`, {
+        method: 'DELETE',
+      })
+      console.log(response)
+    } catch (error) {
+      console.error('Error image delete:', error);
+    }    
   }
 
+  // SUBMIT
+  const eventSubmit = async () => {
+    const newGlobalContest = {...globalContest}
+    if (!newGlobalContest.campaign) {
+      alert('กรุณาระบุชื่อแคมเปรญ')
+    } else if (!newGlobalContest.description) {
+      alert('กรุณาระบุคำอธิบาย')
+    }
+    else if (!urlThumbnail) {
+      alert('กรุณาเลือกรูป Thumbnail')
+    } else {
+      try {
+        const response = await fetch('https://api.bomboonsan.com/contest/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },        
+          // body: JSON.stringify({ value: inputValue }),
+          body: JSON.stringify(globalContest),
+        });
+
+        if (response.ok) {
+          // Success, handle the response here
+          alert('Request sent successfully!');
+          window.location.reload();
+        } else {
+          // Handle the error response here
+          console.error('Request failed!');
+        }
+      } catch (error) {
+        console.error('Network error:', error);
+      }
+    }
+  }
 
   return (
+            <>
             <div className='box-widget'>
-              <h1 className='text-4xl font-semibold'>เพิ่มอีเวนท์ใหม่</h1>
+              <h1 className='text-4xl font-bold mt-2'>ADD NEW CONTEST</h1>
               <div className='mt-3'>
                 <Input 
                   type="text" 
@@ -128,7 +166,6 @@ export default function EventSetup() {
                     <span className="label-text">เลือกรูป Thumbnail</span>
                     <span className="label-text-alt">* จำเป็น</span>
                   </label>
-                  {/* <input type="file" className="file-input file-input-sm file-input-bordered file-input-primary w-full" /> */}
                   <input 
                     onChange={handleFileUpload}
                     type="file"
@@ -149,5 +186,11 @@ export default function EventSetup() {
                 />
               </div>
             </div>
+            <div className='my-4'>
+              <button className="btn btn-block btn-primary text-white text-xl rounded-xl" onClick={eventSubmit}>
+                  บันทึก
+              </button>
+            </div>
+            </>
   )
 }

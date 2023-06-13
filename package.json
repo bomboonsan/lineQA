@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "export": "next build && next export",
     "lint": "next lint"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "react": "18.2.0",
     "react-aria": "^3.25.0",
     "react-dom": "18.2.0",
+    "react-quill": "^2.0.0",
     "recoil": "^0.7.7",
     "sass": "^1.62.1",
     "sweetalert2": "^11.7.12",

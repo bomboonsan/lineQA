@@ -66,38 +66,47 @@ export default function Dashboard() {
         fixed={true}
       >
         <Table.Header >
-          <Table.Column>Thumnb</Table.Column>
-          <Table.Column>Name</Table.Column>
-          <Table.Column>Email</Table.Column>
+          <Table.Column>รูปประจำตัว</Table.Column>
+          <Table.Column>ชื่อ</Table.Column>
+          <Table.Column>อีเมล</Table.Column>
+          <Table.Column>จำนวนกิจกรรม</Table.Column>
+          <Table.Column>วันที่เล่นล่าสุด</Table.Column>
           <Table.Column></Table.Column>
         </Table.Header>
         <Table.Body>
           {data.map((value, index) => (
             <Table.Row key={index}>
               <Table.Cell>
+                <Link href={`/dashboard/user/${value._id}`} >
                 <img
-                  className='w-1/3 h-auto'
-                  width={50} 
-                  height={50} 
-                  src={prefixUrl+value.pictureUrl} 
+                  className='rounded-xl shadow cursor-pointer'
+                  width={75} 
+                  height={75} 
+                  src={value.pictureUrl} 
                   alt='AVATAR'
                 />
+                </Link>
               </Table.Cell>
               <Table.Cell>
+                <Link href={`/dashboard/user/${value._id}`} >
                 {value.displayName}
+                </Link>
               </Table.Cell>
               <Table.Cell>
                 {value.email}
               </Table.Cell>
               <Table.Cell>
+                {
+                value.eventData.length
+                }
+              </Table.Cell>
+              <Table.Cell>
+                {
+                  format(new Date(value.updatedAt), 'dd MMMM yyyy')
+                }
+              </Table.Cell>
+              <Table.Cell>
                 <Row justify="flex-end" align="center">
-                  <Col css={{ width: "auto" }}>
-                    <Tooltip content="แก้ไขคำถาม">
-                      <Link href={`/dashboard/question/edit/${value._id}`}>
-                        EDIT
-                      </Link>
-                    </Tooltip>
-                  </Col>
                   <Col css={{ width: "auto" , marginLeft : "25px" }}>
                     <Tooltip content="ลบคำถาม">
                       {/* <DeleteIcon size={20} fill="#FF0080" onClick={() => {handleDeleteByID(value._id)}} /> */}

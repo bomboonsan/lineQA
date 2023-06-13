@@ -5,10 +5,10 @@ const stateUser = atom({
         isConsent: false,
         point: 0,
         onPage: 'welcome',
-        accesstoken: 'xxxxxxxxxxxxxxxxxxxx',
+        accesstoken: null,
         displayName: null,
         pictureUrl: null,
-        email: 'bom@bomb.com',
+        email: null,
     }
 })
 export {stateUser}

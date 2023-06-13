@@ -85,7 +85,7 @@ export default function Content( {pageData} ) {
 
     return (
         <>
-            {dataUser.onPage === 'welcome' &&
+            {dataUser.onPage === 'welcome' && dataUser.accesstoken !== null &&
             <>
                 <div className='p-4'>
                     <h1 className='text-xl font-bold'>

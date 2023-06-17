@@ -5,9 +5,9 @@ const stateUser = atom({
         isConsent: false,
         point: 0,
         onPage: 'welcome',
-        accesstoken: 'Ue003cf1394a776ed6898a14ed554a3ab',
-        displayName: 'Bomboonsan',
-        pictureUrl: 'https://profile.line-scdn.net/0hCiDc2a40HEZpGgvPo71iORlKHyxKa0VUTHpUKQlIEnBTeQkRECwGI1UTECFVeFtEEX9acFodEHFlCWsgd0zgcm4qQnFTKl4RQ3hVqQ',
+        accesstoken: null,
+        displayName: null,
+        pictureUrl: null,
         email: null,
     }
 })

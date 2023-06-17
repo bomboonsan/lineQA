@@ -65,23 +65,23 @@ export default function Content( {pageData} ) {
 
     // START LINE LIFF NEW
     useEffect(() => {
-        // ตรวจสอบว่าเป็น LOCALHOST ?
-        const domain = window.location.origin;
-        if (domain == 'http://localhost:3000') {
+        // // ตรวจสอบว่าเป็น LOCALHOST ?
+        // const domain = window.location.origin;
+        // if (domain == 'http://localhost:3000') {
             
-        } else {
+        // } else {
             
-            const newStateUser = {...dataUser};
-            if (newStateUser.displayName == null) {
-                initializeLiff()
-            }
+        //     const newStateUser = {...dataUser};
+        //     if (newStateUser.displayName == null) {
+        //         initializeLiff()
+        //     }
 
-        }
-
-        // const newStateUser = {...dataUser};
-        // if (newStateUser.displayName == null) {
-        //     initializeLiff()
         // }
+
+        const newStateUser = {...dataUser};
+        if (newStateUser.displayName == null) {
+            initializeLiff()
+        }
 
     }, [dataUser])
 

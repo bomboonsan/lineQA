@@ -33,8 +33,7 @@ export default function Container({ Component, pageProps }) {
     "embed": null,
     "questionImage": null,
     "type": null,
-    "point": null,
-    "correct": [],
+    "point": [],
     "answer": [],
     "answerImg": [],
     "status": {
@@ -146,32 +145,32 @@ export default function Container({ Component, pageProps }) {
 
   const [stateStep, setStateStep] = useState(1);
   const nextStep = () => {
-    let completeSetup = true;
-    const newGlobolEvent = {...globalEvent}
-    if (newGlobolEvent.campaign && newGlobolEvent.description && newGlobolEvent.thumbnail) {
-    } else {
-      completeSetup = false
-      alert ('กรุณาระบุข้อมูลทุกช่องด้วยครับ')
-    }
-    // totatPoint
-    console.log('totatPoint'+totatPoint)
+    // let completeSetup = true;
+    // const newGlobolEvent = {...globalEvent}
+    // if (newGlobolEvent.campaign && newGlobolEvent.description && newGlobolEvent.thumbnail) {
+    // } else {
+    //   completeSetup = false
+    //   alert ('กรุณาระบุข้อมูลทุกช่องด้วยครับ')
+    // }
+    // // totatPoint
+    // console.log('totatPoint'+totatPoint)
 
-    if (stateStep < 3 && completeSetup) {
-      if (stateStep == 1) {
-        setStateStep(stateStep+1) 
-      } else if (stateStep == 2 && totatPoint > 0) {
-        setStateStep(stateStep+1) 
-      } else {
-        const newGlobolEvent = {...globalEvent}
-        let lastQuestion = newGlobolEvent.questions[newGlobolEvent.questions.length - 1];
-        if (lastQuestion.status.complete == false) {
-          alert(lastQuestion.status.msg)
-        }
-      }
-    }
+    // if (stateStep < 3 && completeSetup) {
+    //   if (stateStep == 1) {
+    //     setStateStep(stateStep+1) 
+    //   } else if (stateStep == 2 && totatPoint > 0) {
+    //     setStateStep(stateStep+1) 
+    //   } else {
+    //     const newGlobolEvent = {...globalEvent}
+    //     let lastQuestion = newGlobolEvent.questions[newGlobolEvent.questions.length - 1];
+    //     if (lastQuestion.status.complete == false) {
+    //       alert(lastQuestion.status.msg)
+    //     }
+    //   }
+    // }
 
     // BYPASS
-    // setStateStep(stateStep+1) 
+    setStateStep(stateStep+1) 
 
   }
   const previousStep = () => {
@@ -199,6 +198,7 @@ export default function Container({ Component, pageProps }) {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },        
           // body: JSON.stringify({ value: inputValue }),
           body: JSON.stringify(globalEvent),

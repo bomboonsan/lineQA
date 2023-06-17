@@ -14,28 +14,42 @@ export default function Mockup({ questionData , questionIndex }) {
 
 
   const [answers, setAnswers] = useState(['']);
+  const [point, setPoint] = useState(['']);
   useEffect(() => {
     setAnswers(questionData.answer)
-  }, [questionData]);  
+    setPoint(questionData.point)
+  }, [questionData]);
 
   // ดึงค่าคำตอบ User
   const [dataSelectAnswer, setDataSelectAnswer] = useState(Array(questionData.answer.length).fill(false)); // ค่าเริ่มต้น ให้มีจำนวน arr เท่ากับ questionData.answer และค่าเริ่มต้น false
+  const [userPoint, setUserPoint] = useState(Array(questionData.answer.length).fill(0)); // ค่าเริ่มต้น ให้มีจำนวน arr เท่ากับ questionData.answer และค่าเริ่มต้น 0
   const handleSelectAnswer = (event, index) => {
     const updateValues = [...dataSelectAnswer];
+    const updateAnsPoint = [...userPoint];
+
     updateValues[event.target.value] = true;
     if (event.target.checked) {
-      updateValues[event.target.value] = true
+      updateValues[event.target.value] = true;
+      
+      const ansPoint = event.target.getAttribute('data-point');
+      updateAnsPoint[event.target.value] = Number(ansPoint)
+
     } else {
       updateValues[event.target.value] = false
+
+      const ansPoint = event.target.getAttribute('data-point');
+      updateAnsPoint[event.target.value] = 0
+
     }
+    setUserPoint(updateAnsPoint)
     setDataSelectAnswer(updateValues);    
   };
 
   useEffect(() => {
     const newGlobolAnswer = [...globolAnswer]
-    newGlobolAnswer[questionIndex] = dataSelectAnswer
+    newGlobolAnswer[questionIndex] = userPoint
     setGlobolAnswer(newGlobolAnswer)
-  }, [dataSelectAnswer]);
+  }, [userPoint]);
 
   return (
     
@@ -59,6 +73,7 @@ export default function Mockup({ questionData , questionIndex }) {
                   type="checkbox" 
                   id={`Answer_${index}`} // Dynamically set the id using index
                   value={index}
+                  data-point={point[index]}
                   onChange={(event) => handleSelectAnswer(event, index)} 
                 />  
                 <label 

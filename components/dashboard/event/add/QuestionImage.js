@@ -23,8 +23,7 @@ export default function QuestionText( props ) {
   
   const [inputValues, setInputValues] = useState(['', '', '']);
   const [inputTitle, setInputTitle] = useState('');
-  const [answerCorrect, setAnswerCorrect] = useState([false, false, false]);
-  const [pointQ, setPointQ] = useState('');     
+  const [point, setPoint] = useState(['', '', '']);
 
   // Question Data Default Format
   const [stateQuestion , SetStateQuestion] = useState({
@@ -32,8 +31,7 @@ export default function QuestionText( props ) {
     "embed": null,
     "questionImage": null,
     "type": null,
-    "point": null,
-    "correct": [],
+    "point": [],
     "answer": [],
     "answerImg": [],
     "status": {
@@ -44,11 +42,11 @@ export default function QuestionText( props ) {
 
   const handleAddIndex = () => {
     setInputValues([...inputValues, '']);
-    setAnswerCorrect([...answerCorrect, false]);
+    setPoint([...point, '']);
   };
   const handleRemoveIndex = () => {
     setInputValues(inputValues.slice(0, -1));
-    setAnswerCorrect(answerCorrect.slice(0, -1));
+    setPoint(point.slice(0, -1));
   };
 
   const handleTitleChange = (event) => {
@@ -56,22 +54,10 @@ export default function QuestionText( props ) {
     setInputTitle(newTitleChange);
   };
 
-  const handlePointChange = (event) => {
-    const newPointChange = event.target.value;
-    setPointQ(newPointChange);
-  };
-
-  const handleSwitchChange = (event, index) => {
-    
-    const newAnswerCorrect = [...answerCorrect];
-    newAnswerCorrect[event.target.value] = true;
-
-    if (event.target.checked) {
-      newAnswerCorrect[event.target.value] = true
-    } else {
-      newAnswerCorrect[event.target.value] = false
-    }
-    setAnswerCorrect(newAnswerCorrect);    
+  const handlePointChange = (event, index) => {
+    const newPointValues = [...point];
+    newPointValues[index] = Number(event.target.value);
+    setPoint(newPointValues);
   };
   
   
@@ -159,7 +145,7 @@ export default function QuestionText( props ) {
   // Update State
   useEffect(() => {
     updateGlobolState();
-  }, [inputValues,inputTitle,answerCorrect,pointQ,urlThumbnail,urlAnswerImages]);
+  }, [inputValues,inputTitle,point,urlThumbnail,urlAnswerImages]);
   
 
   const updateGlobolState = async () => {
@@ -184,18 +170,12 @@ export default function QuestionText( props ) {
         "complete": false,
         "msg": 'กรุณาระบุคำตอบให้ครบด้วยครับ',
       }
-    }
-    else if (!answerCorrect.includes(true)) {
-      status = {
-        "complete": false,
-        "msg": 'กรุณาระบุคำตอบที่ต้องการด้วยครับ',
-      }
     } else if (urlAnswerImages.length !== inputValues.length) {
       status = {
         "complete": false,
         "msg": 'กรุณาเพิ่มรูปภาพให้ครบด้วยครับ',
       }
-    } else if (pointQ == '' || pointQ == null) {
+    } else if (point == '' || point == null) {
       status = {
         "complete": false,
         "msg": 'กรุณาระบุคะแนน',
@@ -211,8 +191,7 @@ export default function QuestionText( props ) {
       "title": inputTitle,
       "type": "image",
       "questionImage": urlThumbnail,
-      "point": pointQ,
-      "correct": answerCorrect,
+      "point": point,
       "answer": inputValues,
       "answerImg": urlAnswerImages,
       "status": status
@@ -237,9 +216,7 @@ export default function QuestionText( props ) {
       alertErrorText = 'กรุณาระบบุคำตอบด้วยครับ'
     } else if(inputValues.includes("")) {
       alertErrorText = 'กรุณาระบุตัวเลือกคำตอบให้ครบด้วยครับ'
-    } else if(answerCorrect[0] == false && answerCorrect[1] == false && answerCorrect[2] == false) {
-      alertErrorText = 'กรุณาเลือกคำตอบที่ถูกต้องด้วยครับ'
-    } else if(pointQ =='') {
+    } else if(point =='') {
       alertErrorText = 'กรุณาระบุจำนวนคะแนนของข้อนี้ด้วยครับ'
     } else {
       isOk = true;
@@ -257,8 +234,7 @@ export default function QuestionText( props ) {
           "title": inputTitle,
           "type": "image",
           "questionImage": urlThumbnail,
-          "point": pointQ,
-          "correct": answerCorrect,
+          "point": point,
           "answer": inputValues,
           "answerImg": urlAnswerImages
         };
@@ -303,7 +279,7 @@ export default function QuestionText( props ) {
             />
           </header>
           <section className='my-3'>
-            {/* {thumbnailReader && <img className="w-auto mx-auto h-auto rounded-3 mb-3" src={thumbnailReader} alt="Selected Image" />} */}
+            {!urlThumbnail && <p className='text-red-500 px-3'>กรุณาเลือกรูปหน้าปกคำถาม</p> }
             {urlThumbnail && <img className="w-auto mx-auto h-auto rounded-3 mb-3" src={prefixImg+urlThumbnail} alt="Selected Image" />}
             <form className="flex items-center space-x-6">
               <label className="block">
@@ -316,40 +292,56 @@ export default function QuestionText( props ) {
                   className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                 />
               </label>
-              {/* <Button flat type="button" color="primary" auto onClick={() => {handleUploadThumbnail()}}>
-                      UPLOAD TEST
-              </Button> */}
-              <Button flat type="button" color="error" auto onClick={() => {removeThumbnail()}}>
-                      REMOVE TEST
-              </Button>
             </form>
           </section>
           <section className='p-3'>
             
             {inputValues.map((value, index) => (
               <div key={index} className="answer-box">            
-              <Tooltip content="คำตอบข้อนี้ถูกหรือไม่">
-                <input 
-                  type="checkbox" 
-                  value={index}
-                  onChange={(event) => handleSwitchChange(event, index)} 
-                  className="d"
-                />
-              </Tooltip>
               <label className="form-check-label" for="Answer_1">
-                <div className='flex flex-wrap'>
-                  <div className='basis-2/3'>
-                    <input
-                        className='w-full focus:ring-0 focus:outline-0 focus:border-b focus:border-b-black border-b'
-                        placeholder='ระบุคำตอบ'
-                        key={index}
-                        type="text"
-                        value={value}
-                        onChange={(event) => handleInputChange(event, index)}
-                      />                          
+                <div className='flex flex-wrap gap-4'>
+                <div className='flex-1'>
+                    <Input 
+                      key={index}
+                      clearable 
+                      bordered 
+                      label={`คำตอบข้อที่ ${index+1}`}
+                      initialValue="" 
+                      value={value}
+                      onChange={(event) => handleInputChange(event, index)}
+                      css={{
+                        width: '100%',
+                      }}
+                    />
                   </div>
-                  <div className='basis-1/3'>
-                    <div className="flex items-center space-x-6">
+                  <div className='flex-initial'>
+                    <Input 
+                      type='number'
+                      key={index}
+                      clearable 
+                      bordered 
+                      label={`คะแนนข้อที่ ${index+1}`}
+                      initialValue="" 
+                      value={point[index]}
+                      onChange={(event) => handlePointChange(event, index)}
+                      css={{
+                        width: '120px',
+                      }}
+                    />
+                  </div>
+                  
+                  <div className='basis-full w-full mt-3'>
+                    {!urlAnswerImages[index] && <p className='text-red-500 px-3'>กรุณาเลือกรูปคำตอบ</p> }
+                    {urlAnswerImages[index] &&
+                      <img
+                      src={prefixImg+urlAnswerImages[index]}
+                      alt="Mockup"
+                      width={300}
+                      height={300}
+                      title={`รูปประจำคำตอบข้อที่ ${index+1}`}
+                    />
+                    }
+                    <div className="flex items-end space-x-6">
                       <label className="block">
                         <span className="sr-only">Choose File</span>
                         <input 
@@ -359,16 +351,7 @@ export default function QuestionText( props ) {
                           className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                         />
                       </label>                          
-                    </div>
-                    {urlAnswerImages[index] &&
-                      <Image
-                      src={prefixImg+urlAnswerImages[index]}
-                      alt="Mockup"
-                      width={300}
-                      height={300}
-                      title={`รูปประจำคำตอบข้อที่ ${index+1}`}
-                    />
-                    }
+                    </div>                    
                   </div>
                 </div>
               </label>
@@ -389,14 +372,6 @@ export default function QuestionText( props ) {
                   </Button>
                   </div>
                 </div>
-              </div>
-              <div className='basis-full md:basis-1/3 lg:basis-1/2 mt-5'>
-                <Input 
-                  type='number' 
-                  placeholder="คะแนนของคำถาม" 
-                  value={pointQ}
-                  onChange={(e) => setPointQ(e.target.value)}
-                />
               </div>
             </div>
             {/* <div className='mt-5'>

@@ -1,32 +1,38 @@
-import { Text , css , Navbar , Spacer  } from "@nextui-org/react";
+import { Text , css , Navbar , Spacer , Button , Link } from "@nextui-org/react";
 import Image from 'next/image'
+import { useState, useEffect } from 'react';
+
+
+// useCookies
+import { useCookies } from 'react-cookie';
+
+import { useRouter } from 'next/navigation'
+
 export default function Layout({ children }) {
+
+  const router = useRouter()
+
+  // Auth
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  useEffect(() => {  
+    const token = cookies.token;
+    if (!token) {
+      console.log('no token')
+      removeCookie('token');
+      router.push('/')
+    }
+  }, []);
+// END Auth
+
+  const handleSignout = () => {
+    removeCookie('token');
+    router.push('/')
+  }
+  
   return (
     <>
-      {/* <header className="w-full mb-5 p-5">
-        <Text
-          h1
-          size={45}
-          css={{
-            textGradient: "45deg, $blue600 -20%, $pink600 50%",
-          }}
-          weight="bold"
-        >
-        Dashboard
-        </Text>
-      </header> */}
       <Navbar isBordered >
         <Navbar.Brand>
-          {/* <Text
-            h1
-            size={25}
-            css={{
-              textGradient: "45deg, $blue600 -20%, $pink600 50%",
-            }}
-            weight="bold"
-          >
-          Dashboard
-          </Text> */}
           <Image 
               className='w-1/3 h-auto'
               width={384} 
@@ -36,9 +42,17 @@ export default function Layout({ children }) {
             />
         </Navbar.Brand>
         <Navbar.Content hideIn="xs">
+          <Navbar.Link href="/dashboard/">Dashboard</Navbar.Link>
           <Navbar.Link href="/dashboard/event">Event</Navbar.Link>
           <Navbar.Link href="/dashboard/contest">Contest</Navbar.Link>
           <Navbar.Link href="/dashboard/user">User</Navbar.Link>
+        </Navbar.Content>
+        <Navbar.Content>
+          <Navbar.Item>
+            <Button auto flat color="error" onClick={handleSignout}>
+              Sign Out
+            </Button>
+          </Navbar.Item>
         </Navbar.Content>
       </Navbar>
       <Spacer y={2} />

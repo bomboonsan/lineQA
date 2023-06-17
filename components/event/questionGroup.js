@@ -21,6 +21,8 @@ export default function QuestionGroup( {pageData} ) {
 
     const [countStep, setCountStep] = useState(0);
 
+    const [isFinish, setIsFinish] = useState(false);
+
     const [questionList, setQuestionList] = useState(['']);
     useEffect(() => {
         setQuestionList(pageData.questions)
@@ -32,35 +34,39 @@ export default function QuestionGroup( {pageData} ) {
         newStateUser.isConsent = true;
         newStateUser.onPage = 'questionGruop';
         setGlobolUser(newStateUser)
-
-
     }, [pageData]);
+
+    useEffect(() => {
+        if (isFinish) {
+            authLine()
+        }
+    }, [isFinish]);
 
 
     const handleNext = () => {
         if (countStep < questionList.length-1) {
             if ( checkNoSelect() ) {
                 setCountStep(countStep+1)
-                checkAnswer()
+
+                // รวมคำตอบ
+                const currentTotalPoint =  sumArray(globolAnswer[countStep])
+                const newGlobolUser = {...globolUser}
+                const newPoint = Number(newGlobolUser.point) + Number(currentTotalPoint);
+                newGlobolUser.point = newPoint;
+                setGlobolUser(newGlobolUser)
+                
             }
         } else {
-            authLine()
-            // FINISH
-            if (areArraysDuplicates (questionList[countStep].correct,globolAnswer[countStep])) {
-                // alert('ถูก')
-                const newGlobolUser = {...globolUser}
-                const newPoint = Number(newGlobolUser.point) + Number(questionList[countStep].point);
-                newGlobolUser.point = newPoint;
-                // TO RESULT PAGE
-                newGlobolUser.onPage = 'result';
-                setGlobolUser(newGlobolUser)
-            } else {
-                // alert('ผิด')      
-                // TO RESULT PAGE
-                const newStateUser = {...globolUser};
-                newStateUser.onPage = 'result';
-                setGlobolUser(newStateUser)      
-            }
+            // authLine()
+            // // FINISH
+            // รวมคำตอบ
+            const currentTotalPoint =  sumArray(globolAnswer[countStep])
+            const newGlobolUser = {...globolUser}
+            const newPoint = Number(newGlobolUser.point) + Number(currentTotalPoint);
+            newGlobolUser.point = newPoint;
+            newGlobolUser.onPage = 'result';
+            setGlobolUser(newGlobolUser)
+            setIsFinish(true)
             
         }
         
@@ -78,28 +84,10 @@ export default function QuestionGroup( {pageData} ) {
             
         }   
     }
-    const getCorrect = () => {
-        const correct = questionList[countStep].correct;
-        
-    }
-    const checkAnswer = () => {
-
-        // console.log(questionList[countStep].correct)
-        // console.log(globolAnswer[countStep])
-
-        if (areArraysDuplicates (questionList[countStep].correct,globolAnswer[countStep])) {
-            // alert('ถูก')
-            const newGlobolUser = {...globolUser}
-            const newPoint = Number(newGlobolUser.point) + Number(questionList[countStep].point);
-            newGlobolUser.point = newPoint;
-            setGlobolUser(newGlobolUser)
-        } else {
-            // alert('ผิด')            
-        }
-    }
+    
 
     const checkNoSelect = () => {
-        if ( globolAnswer[countStep].includes(true) ) {
+        if ( sumArray(globolAnswer[countStep]) !== 0 ) {
             // มีการเลือกคำตอบแล้ว
             return true
         } else {
@@ -111,16 +99,13 @@ export default function QuestionGroup( {pageData} ) {
         }
     }
 
-    // FN ตรวจสอบการเหมือนกันของ Arr ใช้สำหรับตรวจคำตอบ
-    function areArraysDuplicates(original, newArr) {
-        // // Sort the arrays
-        // const sortedOriginal = original.slice().sort();
-        // const sortedNewArr = newArr.slice().sort();
-    
-        // // Compare the sorted arrays
-        // // return เป็น true/false
-        // return JSON.stringify(sortedOriginal) === JSON.stringify(sortedNewArr);
-        return JSON.stringify(original) === JSON.stringify(newArr);
+    // รวม คำตอบ
+    const sumArray = (array) => {
+        let sum = 0;
+        for (let i = 0; i < array.length; i++) {
+        sum += array[i];
+        }
+        return sum;
     }
 
 
@@ -132,6 +117,7 @@ export default function QuestionGroup( {pageData} ) {
           "pictureUrl" : globolUser.pictureUrl,
           "email" : globolUser.email,
           "eventData" : [{
+            "event_id" : pageData._id,
             "campaign" : pageData.campaign,
             "title" : pageData.title,
             "point" : [globolUser.point],
@@ -163,6 +149,7 @@ export default function QuestionGroup( {pageData} ) {
       const submitUser = async (id , eventOldData) => {
     
         const newEventData = {
+            "event_id" : pageData._id,
           "campaign" : pageData.campaign,
           "title" : pageData.title,
           "point" : [globolUser.point],

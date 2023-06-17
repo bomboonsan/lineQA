@@ -43,6 +43,7 @@ export default function ContestElement( {pageData} ) {
           "email" : globolUser.email,
           "eventData" : [],
           "contestData" : [{
+            "event_id" : pageData._id,
             "campaign" : pageData.campaign,
             "title" : pageData.title,
             "fileUrl" : urlThumbnail,
@@ -78,6 +79,7 @@ export default function ContestElement( {pageData} ) {
       const submitUser = async (id , contestOldData) => {
         console.log(`https://api.bomboonsan.com/user/id/${id}`)
         const newContestData = {
+            "event_id" : pageData._id,
             "campaign" : pageData.campaign,
             "title" : pageData.title,
             "fileUrl" : urlThumbnail,

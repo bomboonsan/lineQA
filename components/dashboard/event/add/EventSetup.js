@@ -6,7 +6,17 @@ import { Button , Modal , Text , Input , Textarea , Table , Tooltip , Row, Col ,
 import { useRecoilState } from 'recoil';
 import {stateEvent} from '../../../../state/stateEvent'
 
+// useCookies
+import { useCookies } from 'react-cookie';
+
+import { useRouter } from 'next/navigation';
+
 export default function EventSetup() {
+  const router = useRouter()
+  
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const token = cookies.token;
+
   // Recoil
   const [globalEvent, setGlobalEvent] = useRecoilState(stateEvent)
   useEffect(() => {

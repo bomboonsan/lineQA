@@ -48,12 +48,40 @@ export default function Content( {pageData} ) {
         }
     }
 
+    useEffect(() => {
+        fetchDataTems()
+    }, []);
+    const [dataTerms, setDataTerms] = useState('');
+    const fetchDataTems = async () => {
+        try {
+            const response = await fetch(`https://api.bomboonsan.com/setting/id/648d0250cd1e81175e49605f`);
+            const jsonData = await response.json();
+            setDataTerms(jsonData.termsConditions);
+            // console.log(jsonData)
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
     // START LINE LIFF NEW
     useEffect(() => {
-        const newStateUser = {...dataUser};
-        if (newStateUser.displayName == null) {
-            initializeLiff()
+        // ตรวจสอบว่าเป็น LOCALHOST ?
+        const domain = window.location.origin;
+        if (domain == 'http://localhost:3000') {
+            
+        } else {
+            
+            const newStateUser = {...dataUser};
+            if (newStateUser.displayName == null) {
+                initializeLiff()
+            }
+
         }
+
+        // const newStateUser = {...dataUser};
+        // if (newStateUser.displayName == null) {
+        //     initializeLiff()
+        // }
 
     }, [dataUser])
 
@@ -109,15 +137,15 @@ export default function Content( {pageData} ) {
                 </div>
                 <div className='p-4'>
                     <div className="form-control mb-3">
-                        <label className="label cursor-pointer justify-start gap-3">
+                        <div className="label cursor-pointer justify-start gap-3">
                             <input 
                             type="checkbox" 
                             className="checkbox checkbox-primary" 
                             value='' 
                             onChange={(event) => handleCheckbox(event)} 
                             />
-                            <span className="label-text font-bold">Terms and conditions xxxxxxxx</span> 
-                        </label>
+                            <span className="label-text font-bold" onClick={()=>window.my_modal_3.showModal()}>Terms and conditions</span> 
+                        </div>
                     </div>
                     <button 
                         className="btn btn-block btn-primary text-xl text-white"
@@ -126,6 +154,13 @@ export default function Content( {pageData} ) {
                         เริ่มเลย
                     </button>
                 </div>
+                <dialog id="my_modal_3" className="modal">
+                    <form method="dialog" className="modal-box">
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        <h3 className="font-bold text-lg">Terms and conditions</h3>
+                        <div className='py-4 max-h-96 overflow-y-auto' dangerouslySetInnerHTML={{ __html: dataTerms }} />
+                    </form>
+                </dialog>
             </>
             }
 

@@ -7,7 +7,18 @@ import { format } from 'date-fns';
 
 import { Button , Modal , Text , Table , Tooltip , Row, Col } from "@nextui-org/react";
 
+// useCookies
+import { useCookies } from 'react-cookie';
+
+import { useRouter } from 'next/navigation';
+
 export default function Dashboard() {
+
+  const router = useRouter()
+  
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const token = cookies.token;
+
   const [data, setData] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');  
   const [visible, setVisible] = useState(false);
@@ -33,6 +44,10 @@ export default function Dashboard() {
       try {
         const response = await fetch(`https://api.bomboonsan.com/contest/id/${id}`, {
           method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': `Bearer ${token}`
+          },   
         });
   
         if (response.ok) {

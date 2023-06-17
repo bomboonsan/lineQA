@@ -6,8 +6,18 @@ import { Button , Modal , Text , Input , Textarea , Table , Tooltip , Row, Col ,
 import { useRecoilState } from 'recoil';
 import {stateContest} from '../../../../state/stateContest'
 
+// useCookies
+import { useCookies } from 'react-cookie';
+
+import { useRouter } from 'next/navigation';
 
 export default function EventSetup() {
+
+  const router = useRouter()
+  
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const token = cookies.token;
+
   // Recoil
   const [globalContest, setGlobalContest] = useRecoilState(stateContest)
   useEffect(() => {
@@ -102,23 +112,32 @@ export default function EventSetup() {
       alert('กรุณาเลือกรูป Thumbnail')
     } else {
       try {
+        // const response = await fetch('https://api.bomboonsan.com/contest/add', {
         const response = await fetch('https://api.bomboonsan.com/contest/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+            // 'Authorization': 'Bearer your_token_here'
           },        
           // body: JSON.stringify({ value: inputValue }),
           body: JSON.stringify(globalContest),
         });
 
-        if (response.ok) {
-          // Success, handle the response here
-          alert('Request sent successfully!');
+        const jsonData = await response.json();
+
+        if (jsonData.status == 'success') {
+          alert('Request sent successfully!');          
           window.location.reload();
+        } else if (jsonData.status == 'notoken') {
+
+          alert('notoken');  
+          router.push('/')
+
         } else {
-          // Handle the error response here
           console.error('Request failed!');
         }
+
       } catch (error) {
         console.error('Network error:', error);
       }

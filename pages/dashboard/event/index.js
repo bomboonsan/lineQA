@@ -1,3 +1,4 @@
+"use client";
 import Layout from '../../../components/dashboard/template/layout';
 import Image from 'next/image'
 import Link from 'next/link';
@@ -7,7 +8,29 @@ import { format } from 'date-fns';
 
 import { Button , Modal , Text , Table , Tooltip , Row, Col } from "@nextui-org/react";
 
+// useCookies
+import { useCookies } from 'react-cookie';
+
+import { useRouter } from 'next/router'
+
 export default function Dashboard() {
+  const router = useRouter()
+
+  // Auth
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  useEffect(() => {  
+    const token = cookies.token;
+    if (!token) {
+      console.log('no token')
+      router.push('/')
+    } else (
+      console.log('has token')
+    )
+  }, []);
+// END Auth
+  
+
+
   const [data, setData] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');  
   const [visible, setVisible] = useState(false);
@@ -75,7 +98,7 @@ export default function Dashboard() {
           {data.map((value, index) => (
             <Table.Row key={index}>
               <Table.Cell>
-                {/* <Link href={`/event/${value._id}`} className='hover:text-blue-600'>
+                {/* <Link href={`/event-id?id=${value._id}`} className='hover:text-blue-600'>
                   {value.title}
                 </Link> */}
                 <Link href={`https://liff.line.me/1661407578-X6ro31ow?id=${value._id}`} className='hover:text-blue-600'>

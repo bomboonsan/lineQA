@@ -89,7 +89,7 @@ export default function QuestionEmbed() {
         };
         console.log('bodyJson')
         console.log(bodyJson)
-        const response = await fetch('http://192.168.1.99:5000/question/add', {
+        const response = await fetch('https://api.bomboonsan.com/question/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

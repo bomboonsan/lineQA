@@ -90,7 +90,9 @@ export default function Dashboard() {
                           {index+1}
                         </Table.Cell>
                         <Table.Cell>
-                          {value.campaign}
+                          <Link href={value.event_id && `/dashboard/event/${value.event_id}`} className='hover:text-blue-600'>
+                            {value.campaign}
+                          </Link>
                         </Table.Cell>
                         <Table.Cell>
                           {value.title}

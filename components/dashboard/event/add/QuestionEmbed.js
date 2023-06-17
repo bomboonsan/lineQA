@@ -22,7 +22,7 @@ export default function QuestionText( props ) {
   const [inputTitle, setInputTitle] = useState('');
   const [inputEmbed, setInputEmbed] = useState('');
   const [answerCorrect, setAnswerCorrect] = useState([false, false, false]);
-  const [pointQ, setPointQ] = useState('');
+  const [point, setPoint] = useState('');
 
   // Question Data Default Format
   const [stateQuestion , SetStateQuestion] = useState({
@@ -31,7 +31,6 @@ export default function QuestionText( props ) {
     "questionImage": null,
     "type": null,
     "point": null,
-    "correct": [],
     "answer": [],
     "answerImg": [],
     "status": {
@@ -48,13 +47,13 @@ export default function QuestionText( props ) {
 
   const handleAddIndex = () => {
     setInputValues([...inputValues, '']);
-    setAnswerCorrect([...answerCorrect, false]);
+    setPoint([...point, '']);
 
     updateGlobolState();
   };
   const handleRemoveIndex = () => {
     setInputValues(inputValues.slice(0, -1));
-    setAnswerCorrect(answerCorrect.slice(0, -1));
+    setPoint(point.slice(0, -1));
 
     updateGlobolState();
   };
@@ -77,22 +76,10 @@ export default function QuestionText( props ) {
     return htmlRegex.test(inputValue);
   };
 
-  const handlePointChange = (event) => {
-    const newPointChange = event.target.value;
-    setPointQ(newPointChange);
-  };
-
-  const handleSwitchChange = (event, index) => {
-    
-    const newAnswerCorrect = [...answerCorrect];
-    newAnswerCorrect[event.target.value] = true;
-
-    if (event.target.checked) {
-      newAnswerCorrect[event.target.value] = true
-    } else {
-      newAnswerCorrect[event.target.value] = false
-    }
-    setAnswerCorrect(newAnswerCorrect);    
+  const handlePointChange = (event, index) => {
+    const newPointValues = [...point];
+    newPointValues[index] = Number(event.target.value);
+    setPoint(newPointValues);
   };
   
   
@@ -106,7 +93,7 @@ export default function QuestionText( props ) {
   // Update State
   useEffect(() => {
     updateGlobolState();
-  }, [inputValues,inputTitle,answerCorrect,pointQ,inputEmbed]);
+  }, [inputValues,inputTitle,point,inputEmbed]);
 
   const updateGlobolState = () => {
     // CHECK COMPLETE
@@ -130,13 +117,7 @@ export default function QuestionText( props ) {
         "complete": false,
         "msg": 'กรุณาใส่โค้ด Embed ของวิดีโอด้วยครับ',
       }
-    }
-    else if (!answerCorrect.includes(true)) {
-      status = {
-        "complete": false,
-        "msg": 'กรุณาระบุคำตอบที่ต้องการด้วยครับ',
-      }
-    } else if (pointQ == '' || pointQ == null) {
+    }else if (point == '' || point == null) {
       status = {
         "complete": false,
         "msg": 'กรุณาระบุคะแนน',
@@ -152,8 +133,7 @@ export default function QuestionText( props ) {
       "title": inputTitle,
       "embed": inputEmbed,
       "type": "embed",
-      "point": pointQ,      
-      "correct": answerCorrect,
+      "point": point,      
       "answer": inputValues,
       "status": status
     };
@@ -175,9 +155,7 @@ export default function QuestionText( props ) {
       alertErrorText = 'กรุณาระบบุคำตอบด้วยครับ'
     } else if(inputValues.includes("")) {
       alertErrorText = 'กรุณาระบุตัวเลือกคำตอบให้ครบด้วยครับ'
-    } else if(answerCorrect[0] == false && answerCorrect[1] == false && answerCorrect[2] == false) {
-      alertErrorText = 'กรุณาเลือกคำตอบที่ถูกต้องด้วยครับ'
-    } else if(pointQ =='') {
+    } else if(point =='') {
       alertErrorText = 'กรุณาระบุจำนวนคะแนนของข้อนี้ด้วยครับ'
     } else {
       isOk = true;
@@ -194,8 +172,7 @@ export default function QuestionText( props ) {
           "title": inputTitle,
           "embed": inputEmbed,
           "type": "embed",
-          "point": pointQ,
-          "correct": answerCorrect,
+          "point": point,
           "answer": inputValues
         };
 
@@ -247,18 +224,8 @@ export default function QuestionText( props ) {
           <section className='p-3'>
             
             {inputValues.map((value, index) => (
-              <div key={index} className='pt-5 mb-5'>
-                <div className='flex flex-wrap items-center gap-4'>
-                  <div className='flex-initial'>
-                    <Tooltip content="คำตอบข้อนี้ถูกหรือไม่">
-                      <input 
-                        type="checkbox" 
-                        value={index}
-                        onChange={(event) => handleSwitchChange(event, index)} 
-                        className="d"
-                      />
-                    </Tooltip>
-                  </div>
+              <div key={index} className='pt-8'>
+                <div className='flex flex-wrap items-center gap-4'>                  
                   <div className='flex-1'>
                     <Input 
                       key={index}
@@ -273,7 +240,23 @@ export default function QuestionText( props ) {
                       }}
                     />
                   </div>
+                  <div className='flex-initial'>
+                    <Input 
+                      type='number'
+                      key={index}
+                      clearable 
+                      bordered 
+                      labelPlaceholder={`คะแนนข้อที่ ${index+1}`}
+                      initialValue="" 
+                      value={point[index]}
+                      onChange={(event) => handlePointChange(event, index)}
+                      css={{
+                        width: '120px',
+                      }}
+                    />
+                  </div>
                 </div>
+                <hr className='mt-8' />
               </div>
             ))}
             
@@ -291,14 +274,6 @@ export default function QuestionText( props ) {
                   </Button>
                   </div>
                 </div>
-              </div>
-              <div className='basis-full md:basis-1/3 lg:basis-1/2 mt-5'>
-                <Input 
-                  type='number' 
-                  placeholder="คะแนนของคำถาม" 
-                  value={pointQ}
-                  onChange={(event) => handlePointChange(event)}
-                />
               </div>
             </div>
             {/* <div className='mt-5'>

@@ -1,4 +1,5 @@
 import Layout from '../../../components/dashboard/template/layout';
+import '../../../app/globals.scss'
 import Image from 'next/image'
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -7,7 +8,8 @@ import { useRouter } from 'next/router'
 
 import { format } from 'date-fns';
 
-import { Button , Modal , Text , Table , Tooltip , Row, Col } from "@nextui-org/react";
+import { Button , Modal , Text , Table , Tooltip , Row, Col } from "@nextui-org/react"; 
+
 
 export default function Dashboard() {
   const router = useRouter()
@@ -32,7 +34,7 @@ export default function Dashboard() {
       const response = await fetch(`https://api.bomboonsan.com/user/event/${id}`);
       const jsonData = await response.json();
       setData(jsonData);
-      // console.log(jsonData)
+      console.log(jsonData)
     } catch (error) {
       console.error('Error:', error);
     }
@@ -42,7 +44,7 @@ export default function Dashboard() {
       const response = await fetch(`https://api.bomboonsan.com/event/id/${id}`);
       const jsonData = await response.json();
       setDataEvent(jsonData);
-      console.log(jsonData)
+      // console.log(jsonData)
     } catch (error) {
       console.error('Error:', error);
     }
@@ -68,7 +70,7 @@ export default function Dashboard() {
         <Table.Header >
           <Table.Column>รูปประจำตัว</Table.Column>
           <Table.Column>ชื่อ</Table.Column>
-          <Table.Column>อีเมล</Table.Column>
+          <Table.Column>คะแนน</Table.Column>
           <Table.Column>วันที่เล่นล่าสุด</Table.Column>
         </Table.Header>
         <Table.Body>
@@ -91,7 +93,19 @@ export default function Dashboard() {
                 </Link>
               </Table.Cell>
               <Table.Cell>
-                {value.email}
+                { value.eventData.map((item,index) => (
+                    <>
+                      {item.event_id == id && item.point !== [null] ? (
+                        <span className='pointoftable'>
+                        {item.point}
+                        </span>
+                      ): (
+                        <>
+                        </>
+                      )}
+                    </>
+                  ))
+                }
               </Table.Cell>
               <Table.Cell>
                 {
@@ -112,6 +126,7 @@ export default function Dashboard() {
       </Table>
     )
   }
+
 
   return (
     <Layout>

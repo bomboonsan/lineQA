@@ -3,6 +3,8 @@ import Image from 'next/image'
 
 import { useEffect, useState , useMemo  } from 'react';
 
+import { Button , Textarea } from "@nextui-org/react";
+
 // useCookies
 import { useCookies } from 'react-cookie';
 
@@ -19,6 +21,9 @@ export default function Dashboard() {
 
   const router = useRouter()
   const [value, setValue] = useState('');
+  const [html, setHtml] = useState('');
+  const [ishtml, setIshtml] = useState(false);
+  const [textBtn, setTextBtn] = useState('HTML');
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]);
 
 
@@ -36,6 +41,19 @@ export default function Dashboard() {
       console.error('Error:', error);
     }
   };
+
+
+  const switchHtml = () => {
+    if (ishtml) {
+      setValue(html);
+      setIshtml(false)
+      setTextBtn('HTML')
+    } else {
+      setHtml(value);
+      setIshtml(true)
+      setTextBtn('VISUAL')
+    }
+  }
 
   const quillSubmit = async() => {
     try {
@@ -78,8 +96,30 @@ export default function Dashboard() {
     <Layout>
         <main className="">
           <h2 className='text-2xl font-bold mb-4'>ตั้งค่าข้อกำหนดในการให้บริการ (Terms and Conditions)</h2>
-          <ReactQuill theme="snow" value={value} onChange={setValue} />
-          <button className="btn btn-sm btn-wide btn-primary mt-5" onClick={quillSubmit}>บันทึก</button>
+          <div className='text-right'>
+          <button className="btn btn-sm btn-wide rounded-[0px] mt-5" onClick={switchHtml}>{textBtn}</button>
+          </div>
+          {ishtml ? (
+            <Textarea
+            width='100%'
+            value={html}
+            onChange={(e) => setHtml(e.target.value)}
+            // label="HTML CODE"
+            placeholder="Enter your html code."
+          />
+          ) : (
+<ReactQuill theme="snow" value={value} onChange={setValue} />
+          )}
+          {/* <ReactQuill theme="snow" value={value} onChange={setValue} /> */}
+          <button className="btn btn-sm btn-wide btn-primary mt-5" onClick={quillSubmit}>บันทึก</button>         
+
+          {/* <Textarea
+            width='100%'
+            value={html}
+            onChange={(e) => setHtml(e.target.value)}
+            label="HTML CODE"
+            placeholder="Enter your html code."
+          /> */}
         </main>
     </Layout>
   )

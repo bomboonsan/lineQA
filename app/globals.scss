@@ -4,6 +4,28 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+@font-face {
+  font-family: 'BoschSans';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('/fonts/BoschSans-Light.otf') format('opentype');
+}
+@font-face {
+  font-family: 'BoschSans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/BoschSans-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'BoschSans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/BoschSans-Medium.otf') format('opentype');
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -22,7 +44,7 @@ body {
   // color: rgb(var(--foreground-rgb));
   color: #333;
   background-color: #ddd;
-  font-family: 'Noto Sans Thai', sans-serif;
+  font-family: 'BoschSans', sans-serif;
 }
 
 #appWrap {
@@ -86,4 +108,17 @@ body {
   100%{
     opacity: 1;
   }
+}
+
+.pointoftable {
+  @apply inline-block;
+
+}
+.pointoftable::after {
+  content: ',';
+  @apply px-[2px];
+}
+
+.pointoftable:last-child::after {
+  display: none;
 }

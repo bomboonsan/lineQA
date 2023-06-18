@@ -2,6 +2,8 @@ import './globals.scss'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
 
+import Head from 'next/head'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -12,9 +14,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head>
+        {/* <title>Next App</title> */}
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <body>
         <div id='appWrap'>
-          <div className='topBar'></div>
+          {/* <div className='topBar'></div>
           <header className='mb-3 px-4'>
             <Image 
               className='w-1/3 h-auto'
@@ -23,7 +29,15 @@ export default function RootLayout({ children }) {
               src='/images/logo.png'
               alt='LOGO'
             />
-          </header> 
+          </header>  */}
+          <Image 
+              className='w-full h-auto'
+              width={800} 
+              height={128} 
+              src='/images/bosch_logo.png'
+              alt='LOGO'
+            />
+
           
           {children}
         

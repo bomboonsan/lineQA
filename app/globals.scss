@@ -38,11 +38,15 @@ body {
   @apply border border-[#111] p-2 mb-3 last:mb-0;
   @apply flex flex-wrap items-start;
   label {
-    @apply ms-2 flex-auto;
+    @apply ms-2 flex-auto max-w-[95%];
   }
   input {
     @apply mt-1 flex-initial;
   }
+}
+
+.answer-active {
+  @apply border border-[#007BC2];
 }
 
 .result-box {

@@ -148,7 +148,7 @@ export default function Content( {pageData} ) {
                         </div>
                     </div>
                     <button 
-                        className="btn btn-block btn-primary text-xl text-white"
+                        className="btn btn-block btn-primary text-xl text-white rounded-[0]"
                         onClick={handleStart}
                     >
                         เริ่มเลย

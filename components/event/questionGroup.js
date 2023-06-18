@@ -210,9 +210,6 @@ export default function QuestionGroup( {pageData} ) {
 
     return (
         <>
-            <div>
-                คะแนนปัจจุบัน {globolUser && globolUser.point}
-            </div>
             {questionList && questionList.map((item,index) => (
                 <div key={index}>
                     {item.type == 'text' && index == countStep &&
@@ -228,7 +225,7 @@ export default function QuestionGroup( {pageData} ) {
             ))}          
             {countStep == 0 ? (
                 <div className='my-4 px-3'>   
-                    <button className="btn btn-block btn-primary text-xl text-white" onClick={handleNext}>
+                    <button className="btn btn-block btn-primary text-xl text-white rounded-[0]" onClick={handleNext}>
                     ถัดไป
                     </button>
               </div>
@@ -236,10 +233,10 @@ export default function QuestionGroup( {pageData} ) {
             (
             <div className='my-4 px-3'> 
                 <div className='grid grid-cols-2 gap-4'>
-                    <button className="btn btn-block btn-primary text-xl text-white" onClick={handlePrev}>
+                    <button className="btn btn-block btn-primary text-xl text-white rounded-[0]" onClick={handlePrev}>
                         ย้อนกลับ
                     </button>
-                    <button className="btn btn-block btn-primary text-xl text-white" onClick={handleNext}>
+                    <button className="btn btn-block btn-primary text-xl text-white rounded-[0]" onClick={handleNext}>
                         ถัดไป
                     </button>
                 </div>                

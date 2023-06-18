@@ -69,7 +69,7 @@ export default function Mockup({ questionData , questionIndex }) {
             
             {answers && answers.map((item, index) => (
               
-              <div key={index} className="answer-box">            
+              <div key={index} className={`answer-box ${dataSelectAnswer[index] ? 'answer-active' : ''}`}>            
                 <input 
                   className="form-check-input" 
                   type="checkbox" 

@@ -7,6 +7,8 @@ import { Button , Modal , Text , Input , Textarea , Table , Tooltip , Row, Col ,
 import QuestionSelectType from './QuestionSelectType';
 import ResultGenerate from './ResultGenerate';
 
+import QuestionText from './QuestionText';
+import QuestionImage from './QuestionImage';
 
 import EventSetup from './EventSetup';
 
@@ -15,8 +17,12 @@ import {stateEvent} from '../../../../state/stateEvent'
 
 import {SSRProvider} from 'react-aria'
 
+// sweetalert2
+import Swal from 'sweetalert2'
 
-export default function Container({ Component, pageProps }) {
+export default function Container({ propDataEvent }) {
+
+  
 
   const [globalEvent, setGlobalEvent] = useRecoilState(stateEvent)
   useEffect(() => {
@@ -24,6 +30,7 @@ export default function Container({ Component, pageProps }) {
     setListQuestion(globalEvent.questions)
     setListResult(globalEvent.results)
   }, [globalEvent]);  
+
   const [dataEvent, setDataevent] = useState({});
   const [listQuestion, setListQuestion] = useState([]);
   const [listResult, setListResult] = useState([]);
@@ -53,7 +60,7 @@ export default function Container({ Component, pageProps }) {
   useEffect(() => {
     const newGlobolEvent = {...globalEvent}
     let allPoint = []
-    console.log(allPoint)
+    // console.log(allPoint)
     
     for (let i = 0; i < newGlobolEvent.questions.length; i++) {
       allPoint.push(newGlobolEvent.questions[i].point)
@@ -64,7 +71,6 @@ export default function Container({ Component, pageProps }) {
       sum += parseInt(allPoint[i]);
     }
     seTotalPoint(sum)
-
   }, [globalEvent]);    
 
   const incrementQuestion = () => {
@@ -145,32 +151,32 @@ export default function Container({ Component, pageProps }) {
 
   const [stateStep, setStateStep] = useState(1);
   const nextStep = () => {
-    let completeSetup = true;
-    const newGlobolEvent = {...globalEvent}
-    if (newGlobolEvent.campaign && newGlobolEvent.description && newGlobolEvent.thumbnail) {
-    } else {
-      completeSetup = false
-      alert ('กรุณาระบุข้อมูลทุกช่องด้วยครับ')
-    }
-    // totatPoint
-    console.log('totatPoint'+totatPoint)
+    // let completeSetup = true;
+    // const newGlobolEvent = {...globalEvent}
+    // if (newGlobolEvent.campaign && newGlobolEvent.description && newGlobolEvent.thumbnail) {
+    // } else {
+    //   completeSetup = false
+    //   alert ('กรุณาระบุข้อมูลทุกช่องด้วยครับ')
+    // }
+    // // totatPoint
+    // console.log('totatPoint'+totatPoint)
 
-    if (stateStep < 3 && completeSetup) {
-      if (stateStep == 1) {
-        setStateStep(stateStep+1) 
-      } else if (stateStep == 2 && totatPoint > 0) {
-        setStateStep(stateStep+1) 
-      } else {
-        const newGlobolEvent = {...globalEvent}
-        let lastQuestion = newGlobolEvent.questions[newGlobolEvent.questions.length - 1];
-        if (lastQuestion.status.complete == false) {
-          alert(lastQuestion.status.msg)
-        }
-      }
-    }
+    // if (stateStep < 3 && completeSetup) {
+    //   if (stateStep == 1) {
+    //     setStateStep(stateStep+1) 
+    //   } else if (stateStep == 2 && totatPoint > 0) {
+    //     setStateStep(stateStep+1) 
+    //   } else {
+    //     const newGlobolEvent = {...globalEvent}
+    //     let lastQuestion = newGlobolEvent.questions[newGlobolEvent.questions.length - 1];
+    //     if (lastQuestion.status.complete == false) {
+    //       alert(lastQuestion.status.msg)
+    //     }
+    //   }
+    // }
 
     // BYPASS
-    // setStateStep(stateStep+1) 
+    setStateStep(stateStep+1) 
 
   }
   const previousStep = () => {
@@ -180,6 +186,9 @@ export default function Container({ Component, pageProps }) {
   }
 
   const eventSubmit = async () => {
+
+    console.log('id '+propDataEvent._id)
+
     const newGlobolEvent = {...globalEvent}
     let lastResult = newGlobolEvent.results[newGlobolEvent.results.length - 1];
     if (lastResult.resultText == '') {
@@ -194,11 +203,11 @@ export default function Container({ Component, pageProps }) {
       alert('กรุณาเลือกรูปผลลัพท์ล่าสุด')
     } else {
       try {
-        const response = await fetch('https://api.bomboonsan.com/event/add', {
-          method: 'POST',
+        const response = await fetch(`https://api.bomboonsan.com/event/update/${propDataEvent._id}`, {
+          method: 'PUT',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Content-Type': 'application/json'
+            // 'Authorization': `Bearer ${token}`
           },        
           // body: JSON.stringify({ value: inputValue }),
           body: JSON.stringify(globalEvent),
@@ -206,8 +215,12 @@ export default function Container({ Component, pageProps }) {
 
         if (response.ok) {
           // Success, handle the response here
-          alert('Request sent successfully!');
-          window.location.reload();
+          // alert('Request sent successfully!');
+          // window.location.reload();
+          Swal.fire({
+            icon: 'success',
+            title: 'Event update successfully',
+          })
         } else {
           // Handle the error response here
           console.error('Request failed!');
@@ -230,7 +243,7 @@ export default function Container({ Component, pageProps }) {
         </div>
         
         <section className={`${stateStep === 1 ? 'px-3 mb-3 animation-fadeIn relative' : 'd-none'}`}>      
-          <EventSetup />
+          <EventSetup propDataEvent={propDataEvent} />
         </section>
         <section className={`${stateStep === 2 ? 'px-3 mb-3 animation-fadeIn relative' : 'd-none'}`}>
 
@@ -238,6 +251,8 @@ export default function Container({ Component, pageProps }) {
             <div key={index} className='box-widget' ref={(el) => questionItemRefs.current[index] = el}>
               <h2 className='text-4xl font-semibold mb-2'>คำถามที่ {index+1}</h2>
               <QuestionSelectType contentQuestion={item} countQuestion={index} />
+
+              {/* <QuestionImage contentQuestion={item} countQuestion={index} /> */}
             </div>
           ))}   
 
@@ -270,7 +285,7 @@ export default function Container({ Component, pageProps }) {
           {listResult.map((item,index) => (
             <div key={index} className='box-widget'>
               <h2 className='text-4xl font-semibold mb-2'>ผลลัพท์ที่ {index+1}</h2>
-              <ResultGenerate countResult={index} />
+              <ResultGenerate contentResult={item} countResult={index} />
             </div>
           ))
 

@@ -71,30 +71,30 @@ export default function Content( {pageData} ) {
     // }, []);
 
     // START LINE LIFF NEW
-    useEffect(async () => {
+    // useEffect(async () => {
         
-        const liff = (await import('@line/liff')).default
-        try {
-            await liff.init({ liffId: '1661407578-X6ro31ow', });
+    //     const liff = (await import('@line/liff')).default
+    //     try {
+    //         await liff.init({ liffId: '1661407578-X6ro31ow', });
 
 
-            const profile = await liff.getProfile();
-            const { displayName, pictureUrl, email , userId  } = profile;
+    //         const profile = await liff.getProfile();
+    //         const { displayName, pictureUrl, email , userId  } = profile;
 
-            const newStateUser = {...dataUser};
-            newStateUser.accesstoken = userId
-            newStateUser.displayName = displayName
-            newStateUser.pictureUrl = pictureUrl
-            newStateUser.email = email
-            setDataUser(newStateUser)
+    //         const newStateUser = {...dataUser};
+    //         newStateUser.accesstoken = userId
+    //         newStateUser.displayName = displayName
+    //         newStateUser.pictureUrl = pictureUrl
+    //         newStateUser.email = email
+    //         setDataUser(newStateUser)
 
-        } catch (error) {
-        console.error('liff init error', error.message)
-        }
-        if (!liff.isLoggedIn()) {
-        liff.login();
-        }
-    }, [])
+    //     } catch (error) {
+    //     console.error('liff init error', error.message)
+    //     }
+    //     if (!liff.isLoggedIn()) {
+    //     liff.login();
+    //     }
+    // }, [])
 
     return (
         <>

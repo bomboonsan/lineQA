@@ -197,8 +197,8 @@ export default function Container({ Component, pageProps }) {
         const response = await fetch('https://api.bomboonsan.com/event/add', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Content-Type': 'application/json'
+            // 'Authorization': `Bearer ${token}`
           },        
           // body: JSON.stringify({ value: inputValue }),
           body: JSON.stringify(globalEvent),

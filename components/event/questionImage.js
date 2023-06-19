@@ -74,13 +74,14 @@ export default function Mockup({ questionData , questionIndex }) {
                 height={800}
             />
         </figure>
-        <section className='p-3'>            
+        <section className='p-3'>        
+        <form>
             {answers && answers.map((item, index) => (
               
               <div key={index} className={`answer-box ${dataSelectAnswer[index] ? 'answer-active' : ''}`}>            
                 <input 
                   className="form-check-input" 
-                  type="checkbox" 
+                  type="radio" 
                   id={`Answer_${index}`} // Dynamically set the id using index
                   value={index}
                   data-point={point[index]}
@@ -107,6 +108,7 @@ export default function Mockup({ questionData , questionIndex }) {
               </div> 
               
             ))}
+            </form>    
           </section>
       </main>
     

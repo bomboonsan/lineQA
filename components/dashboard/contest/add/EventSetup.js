@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil';
 import {stateContest} from '../../../../state/stateContest'
 
 // useCookies
-import { useCookies } from 'react-cookie';
+// import { useCookies } from 'react-cookie';
 
 import { useRouter } from 'next/navigation';
 
@@ -15,8 +15,8 @@ export default function EventSetup() {
 
   const router = useRouter()
   
-  const [cookies, setCookie, removeCookie] = useCookies(['token']);
-  const token = cookies.token;
+  // const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  // const token = cookies.token;
 
   // Recoil
   const [globalContest, setGlobalContest] = useRecoilState(stateContest)
@@ -116,8 +116,8 @@ export default function EventSetup() {
         const response = await fetch('https://api.bomboonsan.com/contest/add', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Content-Type': 'application/json'
+            // 'Authorization': `Bearer ${token}`
             // 'Authorization': 'Bearer your_token_here'
           },        
           // body: JSON.stringify({ value: inputValue }),

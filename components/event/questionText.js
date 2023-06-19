@@ -66,13 +66,13 @@ export default function Mockup({ questionData , questionIndex }) {
           <p className='text-lg'>{questionData.title} <small>({questionData.point})</small></p>
         </header>
         <section className='p-3'>
-            
+            <form>
             {answers && answers.map((item, index) => (
               
               <div key={index} className={`answer-box ${dataSelectAnswer[index] ? 'answer-active' : ''}`}>            
                 <input 
                   className="form-check-input" 
-                  type="checkbox" 
+                  type="radio" 
                   id={`Answer_${index}`} // Dynamically set the id using index
                   value={index}
                   data-point={point[index]}
@@ -91,6 +91,7 @@ export default function Mockup({ questionData , questionIndex }) {
               </div>
               
             ))}
+            </form>
             {/* <div className='mt-5'>   
               <button className="btn btn-block btn-primary text-xl text-white" onClick={handleSubmit}>
                 ถัดไป

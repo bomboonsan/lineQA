@@ -74,7 +74,7 @@ export default function Result( {pageData} ) {
           <header className='px-3 mb-3'>
             <h1 className='text-4xl font-bold mb-4 text-center'>Thank you for play</h1>
             <p className='text-xl text-center font-bold'>คุณ {globolUser.displayName}</p>
-            <p className='text-xl text-center font-bold'>คะแนนที่ได้ {globolUser.point}</p>
+            {/* <p className='text-xl text-center font-bold'>คะแนนที่ได้ {globolUser.point}</p> */}
             <p className='text-lg text-center'>Answer Generated</p>
           </header>
           <section className='p-3'>
@@ -98,7 +98,7 @@ export default function Result( {pageData} ) {
           </section>
           <section className='p-3'>
             <div className='mt-5'>
-              <button className="btn btn-block btn-primary text-xl text-white" onClick={nativeShare}>
+              <button className="btn btn-block btn-primary text-xl text-white rounded-[0px]" onClick={nativeShare}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-share" viewBox="0 0 16 16">
                   <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
                 </svg>
@@ -106,7 +106,7 @@ export default function Result( {pageData} ) {
               </button>
               
               <div className='mt-3'>
-                <button className="btn btn-block btn-error text-xl text-white" onClick={() => router.reload()}>
+                <button className="btn btn-block btn-error text-xl text-white rounded-[0px]" onClick={() => router.reload()}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                     <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>

@@ -72,7 +72,8 @@ export default function Mockup({ questionData , questionIndex }) {
               <div key={index} className={`answer-box ${dataSelectAnswer[index] ? 'answer-active' : ''}`}>            
                 <input 
                   className="form-check-input" 
-                  type="radio" 
+                  type="radio"
+                  name={questionIndex}
                   id={`Answer_${index}`} // Dynamically set the id using index
                   value={index}
                   data-point={point[index]}

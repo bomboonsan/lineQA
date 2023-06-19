@@ -84,6 +84,7 @@ export default function Mockup({ questionData , questionIndex }) {
                   type="radio" 
                   id={`Answer_${index}`} // Dynamically set the id using index
                   value={index}
+                  name={questionIndex}
                   data-point={point[index]}
                   onChange={(event) => handleSelectAnswer(event, index)} 
                 /> 

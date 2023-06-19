@@ -12,6 +12,8 @@ import { RecoilRoot } from 'recoil';
 import ContainerPage from '../components/event/Container'
 import ContainerPageContest from '../components/contest/Container'
 
+import Head from 'next/head'
+
 
 export default function EventId() {
   const router = useRouter()
@@ -56,10 +58,14 @@ export default function EventId() {
 
   return (
     <>
+    <Head>
+        {/* <title>Next App</title> */}
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
     {data &&
     
     <div id='appWrap'>
-      <div className='topBar'></div>
+      {/* <div className='topBar'></div>
       <header className='mb-3 px-4'>
         <Image 
           className='w-1/3 h-auto'
@@ -68,7 +74,14 @@ export default function EventId() {
           src='/images/logo.png'
           alt='LOGO'
         />
-      </header>       
+      </header> */}
+      <Image 
+        className='w-full h-auto'
+        width={800} 
+        height={128} 
+        src='/images/bosch_logo.png'
+        alt='LOGO'
+      />       
       <main className="">
         {id !== undefined ? (
           <ContainerPage pageData={data} />

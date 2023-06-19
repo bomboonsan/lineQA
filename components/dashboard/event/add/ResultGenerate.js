@@ -5,8 +5,8 @@ import { Button, Textarea , Input , Switch , Tooltip , Radio } from "@nextui-org
 import { useRecoilState } from 'recoil';
 import {stateEvent} from '../../../../state/stateEvent'
 
-export default function ResultGenerate( props ) {
-  const [currentResult, setCurrentResult] = useState(props.countResult);
+export default function ResultGenerate( {minPoint , countResult} ) {
+  const [currentResult, setCurrentResult] = useState(countResult);
 
   // Recoil
   const [globalEvent, setGlobalEvent] = useRecoilState(stateEvent)
@@ -14,13 +14,25 @@ export default function ResultGenerate( props ) {
     setDataevent(globalEvent)
   }, [globalEvent]);    
 
+
+  useEffect(() => {
+    if (minPoint !== null) {
+      setResultData({
+        "pointMin" : String(minPoint),
+        "pointMax" : null,
+        "resultText" : '',
+        "resultImageUrl" : ''
+      })
+    }
+  }, []);    
+
   // useState
   const [dataEvent, setDataevent] = useState({});
 
   // prefix
   const [prefixImg, setPrefixImg] = useState('https://api.bomboonsan.com/');
   const [resultData, setResultData] = useState({
-    "pointMin" : null,
+    "pointMin" : '0',
     "pointMax" : null,
     "resultText" : '',
     "resultImageUrl" : ''
@@ -30,7 +42,7 @@ export default function ResultGenerate( props ) {
     const inputText = event.target.value;
     const newResultData = {...resultData}
     newResultData.resultText = inputText;
-    setResultData(newResultData);
+    setResultData(newResultData);    
   }
   const handleMin = (event) => {
     const inputText = event.target.value;
@@ -96,17 +108,18 @@ export default function ResultGenerate( props ) {
         <div className='flex flex-wrap justify-between mb-4'>
           <div className='flex-initail'>
             <Input 
-              value={resultData.resultMin}
+              value={resultData.pointMin}
               onChange={(event) => handleMin(event)}
               type='number'
               label="คะแนนต่ำที่สุด"
+              disabled={true}
               placeholder="ระบุตัวเลข"
               color="error"
             />
           </div>
           <div className='flex-initail'>
             <Input 
-              value={resultData.resultMax}
+              value={resultData.pointMax}
               onChange={(event) => handleMax(event)}
               type='number'
               label="คะแนนสูงที่สุด"

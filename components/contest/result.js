@@ -59,7 +59,7 @@ export default function Result( {pageData} ) {
       if (index > 0) {
         setIndexResult(index)
       } else {
-        setIndexResult(1)
+        setIndexResult(0)
       }
 
     }

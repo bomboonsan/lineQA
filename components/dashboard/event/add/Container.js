@@ -118,14 +118,30 @@ export default function Container({ Component, pageProps }) {
     } else if (lastResult.pointMin == null) {
       alert('กรุณาระบุค่าคะแนนต่ำที่สุดสำหรับผลลัพท์นี้')
     }
-    else if (lastResult.pointMin == null) {
+    else if (lastResult.pointMax == null) {
       alert('กรุณาระบุค่าคะแนนสูงที่สุดสำหรับผลลัพท์นี้')
+    }
+    else if (Number(lastResult.pointMin) > Number(lastResult.pointMax)) {
+      alert('กรุณาระบุคะแนนให้ถูกต้อง')
     }
     else if (lastResult.resultImageUrl == '') {
       alert('กรุณาเลือกรูปผลลัพท์นี้')
-    } else {
+    } 
+    else {
       // เพิ่มผลลัพท์
-      const newListResult = [...newGlobolEvent.results,emtryResult]
+      // let newEmtryResult = {...emtryResult}
+      // newEmtryResult.pointMin = lastResult.pointMax + 1;
+      let lastResult = newGlobolEvent.results[newGlobolEvent.results.length - 1];
+      const lastResultPoint = Number(lastResult.pointMax) + 1
+
+      const newEmtryResult ={
+        "pointMin" : lastResultPoint,
+        "pointMax" : null,
+        "resultText" : '',
+        "resultImageUrl" : '',
+      }
+
+      const newListResult = [...newGlobolEvent.results,newEmtryResult]
       newGlobolEvent.results = newListResult
       setGlobalEvent(newGlobolEvent)
     }
@@ -198,9 +214,7 @@ export default function Container({ Component, pageProps }) {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
-            // 'Authorization': `Bearer ${token}`
           },        
-          // body: JSON.stringify({ value: inputValue }),
           body: JSON.stringify(globalEvent),
         });
 
@@ -270,7 +284,7 @@ export default function Container({ Component, pageProps }) {
           {listResult.map((item,index) => (
             <div key={index} className='box-widget'>
               <h2 className='text-4xl font-semibold mb-2'>ผลลัพท์ที่ {index+1}</h2>
-              <ResultGenerate countResult={index} />
+              <ResultGenerate countResult={index} minPoint={item.pointMin} />
             </div>
           ))
 

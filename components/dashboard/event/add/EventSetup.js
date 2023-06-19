@@ -125,7 +125,7 @@ export default function EventSetup() {
                 <Input 
                   type="text" 
                   width='100%'
-                  label="หัวข้อ (ไม่จำเป็น)"
+                  label="หัวข้อ *จำเป็น"
                   value={dataEvent.title}
                   onChange={(event) => titleChange(event)} 
                   placeholder="ระบุข้อความ" 

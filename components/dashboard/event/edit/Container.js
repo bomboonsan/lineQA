@@ -207,9 +207,7 @@ export default function Container({ propDataEvent }) {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
-            // 'Authorization': `Bearer ${token}`
           },        
-          // body: JSON.stringify({ value: inputValue }),
           body: JSON.stringify(globalEvent),
         });
 

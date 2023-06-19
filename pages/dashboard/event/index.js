@@ -101,7 +101,7 @@ export default function Dashboard() {
                 {/* <Link href={`/event-id?id=${value._id}`} className='hover:text-blue-600'>
                   {value.title}
                 </Link> */}
-                <Link href={`https://liff.line.me/1661407578-X6ro31ow?id=${value._id}`} className='hover:text-blue-600'>
+                <Link href={`https://liff.line.me/1661407578-X6ro31ow?id=${value._id}`} target="_blank" className='hover:text-blue-600'>
                   {value.title}
                 </Link>
               </Table.Cell>

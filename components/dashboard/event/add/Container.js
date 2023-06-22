@@ -15,6 +15,9 @@ import {stateEvent} from '../../../../state/stateEvent'
 
 import {SSRProvider} from 'react-aria'
 
+// sweetalert2
+import Swal from 'sweetalert2'
+
 
 export default function Container({ Component, pageProps }) {
 
@@ -220,8 +223,14 @@ export default function Container({ Component, pageProps }) {
 
         if (response.ok) {
           // Success, handle the response here
-          alert('Request sent successfully!');
-          window.location.reload();
+          // alert('Request sent successfully!');
+          // window.location.reload();
+          Swal.fire({
+            icon: 'success',
+            title: 'Create event successfully!',
+          }).then((e) => {
+            router.push('/dashboard/event')
+          })
         } else {
           // Handle the error response here
           console.error('Request failed!');

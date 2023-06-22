@@ -218,6 +218,8 @@ export default function Container({ propDataEvent }) {
           Swal.fire({
             icon: 'success',
             title: 'Event update successfully',
+          }).then((e) => {
+            router.push('/dashboard/event')
           })
         } else {
           // Handle the error response here

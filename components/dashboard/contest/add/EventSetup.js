@@ -11,6 +11,10 @@ import {stateContest} from '../../../../state/stateContest'
 
 import { useRouter } from 'next/navigation';
 
+
+// sweetalert2
+import Swal from 'sweetalert2'
+
 export default function EventSetup() {
 
   const router = useRouter()
@@ -127,8 +131,14 @@ export default function EventSetup() {
         const jsonData = await response.json();
 
         if (jsonData.status == 'success') {
-          alert('Request sent successfully!');          
-          window.location.reload();
+          // alert('Request sent successfully!');          
+          // window.location.reload();
+          Swal.fire({
+            icon: 'success',
+            title: 'Create contest successfully!',
+          }).then((e) => {
+            router.push('/dashboard/contest')
+          })
         } else if (jsonData.status == 'notoken') {
 
           alert('notoken');  

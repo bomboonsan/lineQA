@@ -113,8 +113,9 @@ export default function ContestElement( {pageData} ) {
             Swal.fire({
                 icon: 'success',
                 title: 'Successfully',
+            }).then((e) => {
+              window.location.reload();
             })
-            console.log('Request sent successfully!');
           } else {
               console.error('Request failed!');
           }

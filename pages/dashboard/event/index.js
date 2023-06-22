@@ -13,6 +13,9 @@ import { useCookies } from 'react-cookie';
 
 import { useRouter } from 'next/router'
 
+// sweetalert2
+import Swal from 'sweetalert2'
+
 export default function Dashboard() {
   const router = useRouter()
 
@@ -72,6 +75,16 @@ export default function Dashboard() {
     }
   };
 
+
+  const handleCopyUrl = (event) => {
+    const url = event.target.getAttribute("data-url");
+    navigator.clipboard.writeText(url);
+    Swal.fire({
+      icon: 'success',
+      title: 'Link Copied!',
+    })
+  }
+
   if (!data) {
     return <div>Loading...</div>;
   }
@@ -90,6 +103,7 @@ export default function Dashboard() {
       >
         <Table.Header >
           <Table.Column>TITLE</Table.Column>
+          <Table.Column></Table.Column>
           <Table.Column>CAMPAIGN</Table.Column>
           <Table.Column>createdAt</Table.Column>
           <Table.Column></Table.Column>
@@ -103,8 +117,11 @@ export default function Dashboard() {
                 </Link> */}
                 <Link href={`https://liff.line.me/1661407578-X6ro31ow?id=${value._id}`} target="_blank" className='hover:text-blue-600'>
                   {value.title}
-                </Link>
+                </Link>                
               </Table.Cell>
+              <Table.Cell>
+              <Button size="xs" flat data-url={`https://liff.line.me/1661407578-X6ro31ow?id=${value._id}`} onClick={(e) => handleCopyUrl(e)}>GET LINK</Button>
+              </Table.Cell>              
               <Table.Cell>
                 {value.campaign}
               </Table.Cell>

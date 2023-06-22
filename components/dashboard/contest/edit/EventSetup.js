@@ -145,6 +145,8 @@ export default function EventSetup({ propDataEvent }) {
           Swal.fire({
             icon: 'success',
             title: 'Event update successfully',
+          }).then((e) => {
+            router.push('/dashboard/contest')
           })
         } else {
           // Handle the error response here

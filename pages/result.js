@@ -45,7 +45,7 @@ export default function Start() {
   function checkNumberInRange(array, point) {
     for (let i = 0; i < array.length; i++) {
       const { pointMin, pointMax } = array[i];
-      if (point >= Number(pointMin) && point <= Number(pointMax)) {
+      if (Number(point) >= Number(pointMin) && Number(point) <= Number(pointMax)) {
         return i; // Return the index if the number is within the range
       }
     }
@@ -66,11 +66,11 @@ export default function Start() {
       // setNewResultPoint(modifiedArray)
 
       // เปรียบเทียบค่าจาก user และผลลัพท์ เพื่อหา index ของผลลัพท์ที่จะต้องแสดง
-      const index = checkNumberInRange(modifiedArray, userPoint);
+      const index = checkNumberInRange(modifiedArray, Number(userPoint));
       if (index > 0) {
         setIndexResult(index)
       } else {
-        setIndexResult(1)
+        setIndexResult(0)
       }
 
     }

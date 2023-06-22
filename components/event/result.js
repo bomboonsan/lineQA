@@ -64,7 +64,7 @@ export default function Result( {pageData} ) {
         setIndexResult(0)
       }
 
-      setUrlSharedExternal(`https://boschthailand.aclick.asia/result?id=${pageData._id}&name=${encodeURIComponent(globolUser.displayName)}&point=${str(globolUser.point)}&openExternalBrowser=1`)
+      setUrlSharedExternal(`https://boschthailand.aclick.asia/result?id=${pageData._id}&name=${encodeURIComponent(globolUser.displayName)}&point=${String(globolUser.point)}&openExternalBrowser=1`)
 
     }
 

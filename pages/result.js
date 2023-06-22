@@ -73,6 +73,8 @@ export default function Start() {
         setIndexResult(0)
       }
 
+      console.log('userPoint : '+userPoint)
+
     }
 
   }, [results,userPoint]);

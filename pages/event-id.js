@@ -29,14 +29,16 @@ export default function EventId() {
     console.log(window.location.href)
     const eventIdSplit = window.location.href.split("liff.state=%23event");
     const eventID = eventIdSplit[1]
-    if (eventID) {
+    if (eventID !== null) {
       setId(eventID)
     }
     const contestIdSplit = window.location.href.split("liff.state=%23contest");
     const contestID = contestIdSplit[1]
-    if (contestID) {
+    if (contestID !== null) {
       setContest(contestID)
     }
+    console.log('eventID: '+eventID)
+    console.log('contestID: '+contestID)
   });
 
   useEffect(() => {

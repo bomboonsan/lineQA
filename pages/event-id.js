@@ -42,13 +42,13 @@ export default function EventId() {
   });
 
   useEffect(() => {
-    if (id !== undefined || id !== null) {
+    if (id !== undefined && id !== null) {
       fetchData();
     }
   }, [id]);  
 
   useEffect(() => {
-    if (contest !== undefined || contest !== null) {
+    if (contest !== undefined && contest !== null) {
       fetchDataContest();
     }
   }, [contest]);

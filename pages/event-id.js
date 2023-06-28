@@ -31,24 +31,26 @@ export default function EventId() {
     const eventID = eventIdSplit[1]
     if (eventID !== null) {
       setId(eventID)
+      console.log('eventID: '+eventID)
     }
     const contestIdSplit = window.location.href.split("liff.state=%23contest");
     const contestID = contestIdSplit[1]
     if (contestID !== null) {
       setContest(contestID)
+      console.log('contestID: '+contestID)
     }
-    console.log('eventID: '+eventID)
-    console.log('contestID: '+contestID)
+    // console.log('eventID: '+eventID)
+    // console.log('contestID: '+contestID)
   });
 
   useEffect(() => {
-    if (id !== undefined && id !== null) {
+    if (id !== null) {
       fetchData();
     }
   }, [id]);  
 
   useEffect(() => {
-    if (contest !== undefined && contest !== null) {
+    if (contest !== null) {
       fetchDataContest();
     }
   }, [contest]);

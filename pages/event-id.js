@@ -16,20 +16,37 @@ import Head from 'next/head'
 
 
 export default function EventId() {
-  const router = useRouter()
-  const id = router.query.id;
-  const contest = router.query.contest;
+  // const router = useRouter()
+  // const id = router.query.id;
+  // const contest = router.query.contest;
+  const [id, setId] = useState(null);
+  const [contest, setContest] = useState(null);
   const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
   const [data, setData] = useState({});
 
-  useEffect(() => {
-    if (id !== undefined ) {
-      fetchData();
-    }
-  }, [id]);
 
   useEffect(() => {
-    if (contest !== undefined ) {
+    console.log(window.location.href)
+    const eventIdSplit = window.location.href.split("liff.state=%23event");
+    const eventID = eventIdSplit[1]
+    if (eventID) {
+      setId(eventID)
+    }
+    const contestIdSplit = window.location.href.split("liff.state=%23contest");
+    const contestID = contestIdSplit[1]
+    if (contestID) {
+      setContest(contestID)
+    }
+  });
+
+  useEffect(() => {
+    if (id !== undefined || id !== null) {
+      fetchData();
+    }
+  }, [id]);  
+
+  useEffect(() => {
+    if (contest !== undefined || contest !== null) {
       fetchDataContest();
     }
   }, [contest]);

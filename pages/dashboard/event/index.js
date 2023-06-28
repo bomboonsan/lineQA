@@ -115,12 +115,12 @@ export default function Dashboard() {
                 {/* <Link href={`/event-id?id=${value._id}`} className='hover:text-blue-600'>
                   {value.title}
                 </Link> */}
-                <Link href={`https://liff.line.me/1661407578-X6ro31ow?id=${value._id}`} target="_blank" className='hover:text-blue-600'>
+                <Link href={`https://liff.line.me/1661407578-X6ro31ow#event${value._id}`} target="_blank" className='hover:text-blue-600'>
                   {value.title}
                 </Link>                
               </Table.Cell>
               <Table.Cell>
-              <Button size="xs" flat data-url={`https://liff.line.me/1661407578-X6ro31ow?id=${value._id}`} onClick={(e) => handleCopyUrl(e)}>GET LINK</Button>
+              <Button size="xs" flat data-url={`https://liff.line.me/1661407578-X6ro31ow#event${value._id}`} onClick={(e) => handleCopyUrl(e)}>GET LINK</Button>
               </Table.Cell>              
               <Table.Cell>
                 {value.campaign}

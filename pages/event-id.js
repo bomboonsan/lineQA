@@ -29,44 +29,73 @@ export default function EventId() {
     console.log(window.location.href)
     const eventIdSplit = window.location.href.split("liff.state=%23event");
     const eventID = eventIdSplit[1]
-    if (eventID !== null) {
+    if (eventID !== null && eventID !== undefined) {
       setId(eventID)
       console.log('eventID: '+eventID)
+      fetchData_ID(eventID)
+      
+      
     }
     const contestIdSplit = window.location.href.split("liff.state=%23contest");
     const contestID = contestIdSplit[1]
-    if (contestID !== null) {
+    if (contestID !== null && contestID !== undefined) {
       setContest(contestID)
       console.log('contestID: '+contestID)
-    }
-    // console.log('eventID: '+eventID)
-    // console.log('contestID: '+contestID)
-  });
 
-  useEffect(() => {
-    if (id !== null) {
-      fetchData();
+      fetchDataContest_ID(contestID)
     }
-  }, [id]);  
+    
 
-  useEffect(() => {
-    if (contest !== null) {
-      fetchDataContest();
-    }
-  }, [contest]);
+    
+  }, []);
+
+  // useEffect(() => {
+  //   if (id !== null) {
+  //     fetchData();
+  //   }
+  // }, [id]);  
+
+  // useEffect(() => {
+  //   if (contest !== null) {
+  //     fetchDataContest();
+  //   }
+  // }, [contest]);
   
-  const fetchData = async () => {
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch(`https://api.bomboonsan.com/event/id/${id}`);
+  //     const jsonData = await response.json();
+  //     setData(jsonData);
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // };
+  // const fetchDataContest = async () => {
+  //   try {
+  //     const response = await fetch(`https://api.bomboonsan.com/contest/id/${contest}`);
+  //     const jsonData = await response.json();
+  //     setData(jsonData);
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // };
+
+
+  // 
+
+  const fetchData_ID = async (eventID) => {
+    console.log(eventID)
     try {
-      const response = await fetch(`https://api.bomboonsan.com/event/id/${id}`);
+      const response = await fetch(`https://api.bomboonsan.com/event/id/${eventID}`);
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
       console.error('Error:', error);
     }
   };
-  const fetchDataContest = async () => {
+  const fetchDataContest_ID = async (contestID) => {
     try {
-      const response = await fetch(`https://api.bomboonsan.com/contest/id/${contest}`);
+      const response = await fetch(`https://api.bomboonsan.com/contest/id/${contestID}`);
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
@@ -74,11 +103,11 @@ export default function EventId() {
     }
   };
   
-  // console.log(data)
+  console.log(data)
 
-  if(!data._id) {
-    return false
-  }
+  // if(!data._id) {
+  //   return false
+  // }
 
   return (
     <>
@@ -107,7 +136,8 @@ export default function EventId() {
         alt='LOGO'
       />       
       <main className="">
-        {id !== undefined ? (
+        
+      {id !== null ? (
           <ContainerPage pageData={data} />
         ) : (
           <ContainerPageContest pageData={data} />

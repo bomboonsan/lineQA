@@ -16,6 +16,7 @@ specifiers:
   react: 18.2.0
   react-aria: ^3.25.0
   react-cookie: ^4.1.1
+  react-csv: ^2.2.2
   react-dom: 18.2.0
   react-export-excel: ^0.5.3
   react-quill: ^2.0.0
@@ -39,6 +40,7 @@ dependencies:
   react: 18.2.0
   react-aria: 3.25.0_biqbaboplfbrettd7655fr4n2y
   react-cookie: 4.1.1_react@18.2.0
+  react-csv: 2.2.2
   react-dom: 18.2.0_react@18.2.0
   react-export-excel: 0.5.3
   react-quill: 2.0.0_biqbaboplfbrettd7655fr4n2y
@@ -5285,6 +5287,10 @@ packages:
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
       universal-cookie: 4.0.4
+    dev: false
+
+  /react-csv/2.2.2:
+    resolution: {integrity: sha512-RG5hOcZKZFigIGE8LxIEV/OgS1vigFQT4EkaHeKgyuCbUAu9Nbd/1RYq++bJcJJ9VOqO/n9TZRADsXNDR4VEpw==}
     dev: false
 
   /react-dom/18.2.0_react@18.2.0:

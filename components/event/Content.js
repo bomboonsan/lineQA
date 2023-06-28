@@ -22,8 +22,7 @@ export default function Content( {pageData} ) {
     const [dataUser, setDataUser] = useState({});
 
     const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
-    console.log(dataUser)
-
+    // console.log(dataUser)    
 
     const handleCheckbox = (event) => {
         const newStateUser = {...dataUser};
@@ -78,10 +77,10 @@ export default function Content( {pageData} ) {
 
         // }
 
-        const newStateUser = {...dataUser};
-        if (newStateUser.displayName == null) {
-            initializeLiff()
-        }
+        // const newStateUser = {...dataUser};
+        // if (newStateUser.displayName == null) {
+        //     initializeLiff()
+        // }
 
     }, [dataUser])
 
@@ -94,7 +93,7 @@ export default function Content( {pageData} ) {
             const profile = await liff.getProfile();
             const { displayName, pictureUrl, email , userId  } = profile;
 
-            console.log(profile)
+            // console.log(profile)
 
             const newStateUser = {...dataUser};
             newStateUser.accesstoken = userId
@@ -109,6 +108,11 @@ export default function Content( {pageData} ) {
         if (!liff.isLoggedIn()) {
         liff.login();
         }
+    }    
+
+
+    if(!dataUser.displayName) {
+        return false
     }
 
     return (

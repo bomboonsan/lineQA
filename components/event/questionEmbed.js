@@ -8,7 +8,7 @@ import {stateAnswer} from '../../state/stateAnswer'
 
 // Components FOR Dev Module
 
-export default function Mockup({ questionData , questionIndex }) {
+export default function Mockup({ pageData , questionData , questionIndex }) {
   
   const [globolAnswer, setGlobolAnswer] = useRecoilState(stateAnswer)
 
@@ -55,8 +55,8 @@ export default function Mockup({ questionData , questionIndex }) {
     
       <main className="">
         <header className='px-3 mb-3'>
-          <h1 className='text-4xl font-bold mb-4'>Campaign name</h1>
-          <p className='text-lg'>{questionData.title} <small>({questionData.point})</small></p>
+          <h1 className='text-xl font-bold mb-4'>{pageData.campaign}</h1>
+          <p className='text-lg'>{questionData.title}</p>
         </header>
         <section className='p-3'>
           {questionData.embed &&

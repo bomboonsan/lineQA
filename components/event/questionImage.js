@@ -8,7 +8,7 @@ import {stateAnswer} from '../../state/stateAnswer'
 
 // Components FOR Dev Module
 
-export default function Mockup({ questionData , questionIndex }) {
+export default function Mockup({ pageData , questionData , questionIndex }) {
   const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
   
 
@@ -62,8 +62,8 @@ export default function Mockup({ questionData , questionIndex }) {
   return (
       <main className="">
         <header className='px-3 mb-3'>
-          <h1 className='text-4xl font-bold mb-4'>Campaign name</h1>
-          <p className='text-lg'>{questionData.title} <small>({questionData.point})</small></p>
+          <h1 className='text-xl font-bold mb-4'>{pageData.campaign}</h1>
+          <p className='text-lg'>{questionData.title}</p>
         </header>
         <figure className='mb-5'>
             <img

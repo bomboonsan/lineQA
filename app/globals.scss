@@ -122,3 +122,9 @@ body {
 .pointoftable:last-child::after {
   display: none;
 }
+.export_csv {
+  @apply text-right mb-3 px-4;
+}
+.export_csv a {
+  @apply inline-block px-5 py-2 rounded-lg bg-green-700 text-white font-bold;
+}

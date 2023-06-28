@@ -150,10 +150,10 @@ export default function QuestionGroup( {pageData} ) {
     
         const newEventData = {
             "event_id" : pageData._id,
-          "campaign" : pageData.campaign,
-          "title" : pageData.title,
-          "point" : [globolUser.point],
-          "date" : new Date().toISOString()
+            "campaign" : pageData.campaign,
+            "title" : pageData.title,
+            "point" : [globolUser.point],
+            "date" : new Date().toISOString()
         }
     
         let listEventData = [...eventOldData ,newEventData]
@@ -213,13 +213,13 @@ export default function QuestionGroup( {pageData} ) {
             {questionList && questionList.map((item,index) => (
                 <div key={index}>
                     {item.type == 'text' && index == countStep &&
-                        <QuestionText questionData={item} questionIndex={index} />
+                        <QuestionText pageData={pageData} questionData={item} questionIndex={index} />
                     }
                     {item.type == 'image' && index == countStep &&
-                        <QuestionImage questionData={item} questionIndex={index}  />
+                        <QuestionImage pageData={pageData} questionData={item} questionIndex={index}  />
                     }
                     {item.type == 'embed' && index == countStep &&
-                        <QuestionEmbed questionData={item} questionIndex={index} />
+                        <QuestionEmbed pageData={pageData} questionData={item} questionIndex={index} />
                     }
                 </div>
             ))}          

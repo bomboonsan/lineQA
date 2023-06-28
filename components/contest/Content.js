@@ -79,10 +79,10 @@ export default function Content( {pageData} ) {
 
         // }
 
-        const newStateUser = {...dataUser};
-        if (newStateUser.displayName == null) {
-            initializeLiff()
-        }
+        // const newStateUser = {...dataUser};
+        // if (newStateUser.displayName == null) {
+        //     initializeLiff()
+        // }
 
     }, [dataUser])
 
@@ -110,6 +110,10 @@ export default function Content( {pageData} ) {
         if (!liff.isLoggedIn()) {
         liff.login();
         }
+    }
+
+    if(!dataUser.displayName) {
+        return false
     }
 
     return (

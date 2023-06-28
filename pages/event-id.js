@@ -55,6 +55,9 @@ export default function EventId() {
   
   // console.log(data)
 
+  if(!data._id) {
+    return false
+  }
 
   return (
     <>

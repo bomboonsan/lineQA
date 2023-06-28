@@ -115,14 +115,6 @@ export default function Home({ Component, pageProps }) {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <div className='py-4'>
-                  <p>
-                    username : bomboonsan
-                  </p>
-                  <p>
-                    password : 1234
-                  </p>
-                </div>
                 <div>
                     <button className="btn btn-block btn-primary text-white font-bold">Login</button>
                 </div>

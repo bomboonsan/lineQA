@@ -27,7 +27,7 @@ export default function EventId() {
 
   useEffect(() => {
     console.log(window.location.href)
-    const eventIdSplit = window.location.href.split("liff.state=%23event");
+    const eventIdSplit = window.location.href.split("idevent");
     const eventID = eventIdSplit[1]
     if (eventID !== null && eventID !== undefined) {
       setId(eventID)
@@ -36,7 +36,7 @@ export default function EventId() {
       
       
     }
-    const contestIdSplit = window.location.href.split("liff.state=%23contest");
+    const contestIdSplit = window.location.href.split("idcontest");
     const contestID = contestIdSplit[1]
     if (contestID !== null && contestID !== undefined) {
       setContest(contestID)

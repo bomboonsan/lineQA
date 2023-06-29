@@ -18,7 +18,7 @@ export default function Register({ Component, pageProps }) {
         "email": email,
         "password": password
       };
-      const response = await fetch('https://api.bomboonsan.com/admin/register', {
+      const response = await fetch('https://boschthailandbackend.bomboonsan.com/admin/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

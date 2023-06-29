@@ -11,7 +11,7 @@ export default function Result( {pageData} ) {
   const router = useRouter()
 
 
-  const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
+  const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
   const [globolUser, setGlobolUser] = useRecoilState(stateUser)
 
 

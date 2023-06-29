@@ -20,7 +20,7 @@ export default function Result() {
   const [data, setData] = useState({});
   const [results, setResults] = useState(null);
 
-  const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
+  const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
 
 
 
@@ -35,7 +35,7 @@ export default function Result() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://api.bomboonsan.com/event/id/${id}`);
+      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
       const jsonData = await response.json();
       setData(jsonData);
       setResults(jsonData.results);

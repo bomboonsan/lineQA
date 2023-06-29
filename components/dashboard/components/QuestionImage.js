@@ -57,7 +57,7 @@ export default function QuestionImage() {
     });
 
     try {
-      const response = await fetch('https://api.bomboonsan.com/upload/image', {
+      const response = await fetch('https://boschthailandbackend.bomboonsan.com/upload/image', {
         method: 'POST',
         body: formData,
       });
@@ -108,7 +108,7 @@ export default function QuestionImage() {
     });
 
     try {
-      const response = await fetch('https://api.bomboonsan.com/upload/image', {
+      const response = await fetch('https://boschthailandbackend.bomboonsan.com/upload/image', {
         method: 'POST',
         body: formData,
       });
@@ -200,7 +200,7 @@ export default function QuestionImage() {
           "answer": inputValues,
           "answerImg": dataAnwserImagesList
         };
-        const response = await fetch('https://api.bomboonsan.com/question/add', {
+        const response = await fetch('https://boschthailandbackend.bomboonsan.com/question/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -16,7 +16,7 @@ export default function QuestionText( props ) {
   }, [globalEvent]);    
 
   // prefix
-  const [prefixImg, setPrefixImg] = useState('https://api.bomboonsan.com/');
+  const [prefixImg, setPrefixImg] = useState('https://boschthailandbackend.bomboonsan.com/');
 
   // useState
   const [dataEvent, setDataevent] = useState({});
@@ -79,7 +79,7 @@ export default function QuestionText( props ) {
     }
 
     try {
-      const response = await fetch('https://api.bomboonsan.com/upload/image', {
+      const response = await fetch('https://boschthailandbackend.bomboonsan.com/upload/image', {
         method: 'POST',
         body: formData,
       });
@@ -112,7 +112,7 @@ export default function QuestionText( props ) {
     }
 
     try {
-      const response = await fetch('https://api.bomboonsan.com/upload/image', {
+      const response = await fetch('https://boschthailandbackend.bomboonsan.com/upload/image', {
         method: 'POST',
         body: formData,
       });
@@ -132,7 +132,7 @@ export default function QuestionText( props ) {
   const removeImage = async (url) => {
     url = url.replace('images/','')
     try {
-      const response = await fetch(`https://api.bomboonsan.com/upload/image/delete/${url}`, {
+      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/upload/image/delete/${url}`, {
         method: 'DELETE',
       })
       console.log(response)

@@ -9,7 +9,7 @@ import { format } from 'date-fns';
 import { Button , Modal , Text , Table , Tooltip , Row, Col } from "@nextui-org/react";
 
 export default function Dashboard() {
-  const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
+  const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
 
   const router = useRouter()
   const id = router.query.id;
@@ -24,7 +24,7 @@ export default function Dashboard() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://api.bomboonsan.com/user/id/${id}`);
+      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/user/id/${id}`);
       const jsonData = await response.json();
       setData(jsonData);
       console.log(jsonData)

@@ -80,7 +80,7 @@ export default function QuestionText() {
         };
         console.log('bodyJson')
         console.log(bodyJson)
-        const response = await fetch('https://api.bomboonsan.com/question/add', {
+        const response = await fetch('https://boschthailandbackend.bomboonsan.com/question/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

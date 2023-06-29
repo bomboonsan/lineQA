@@ -30,7 +30,7 @@ export default function ResultGenerate( {minPoint , countResult} ) {
   const [dataEvent, setDataevent] = useState({});
 
   // prefix
-  const [prefixImg, setPrefixImg] = useState('https://api.bomboonsan.com/');
+  const [prefixImg, setPrefixImg] = useState('https://boschthailandbackend.bomboonsan.com/');
   const [resultData, setResultData] = useState({
     "pointMin" : '0',
     "pointMax" : null,
@@ -67,7 +67,7 @@ export default function ResultGenerate( {minPoint , countResult} ) {
       await removeImage(urlThumbnail)
     }
     try {
-      const response = await fetch('https://api.bomboonsan.com/upload/image', {
+      const response = await fetch('https://boschthailandbackend.bomboonsan.com/upload/image', {
         method: 'POST',
         body: formData,
       });

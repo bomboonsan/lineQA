@@ -17,7 +17,7 @@ export default function Dashboard() {
   const router = useRouter()
   const id = router.query.id;
 
-  const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
+  const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
 
   const [data, setData] = useState([]);
 
@@ -26,12 +26,12 @@ export default function Dashboard() {
   }, [id]);
 
 
-  // https://api.bomboonsan.com/user/event/648b965bad6d4e4cc6878da5
+  // https://boschthailandbackend.bomboonsan.com/user/event/648b965bad6d4e4cc6878da5
   // endpoint สำหรับดึงข้อมูล User จาก event ID ยังไม่ได้อัพลง Server จริง
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://api.bomboonsan.com/contest/id/${id}`);
+      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/contest/id/${id}`);
       const jsonData = await response.json();
       setData(jsonData);
       console.log(jsonData)

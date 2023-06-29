@@ -17,7 +17,7 @@ export default function Dashboard() {
   const router = useRouter()
   const id = router.query.id;
 
-  const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
+  const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
 
   const [dataEvent, setDataEvent] = useState([]);
 
@@ -29,7 +29,7 @@ export default function Dashboard() {
 
   const fetchDataEvent = async () => {
     try {
-      const response = await fetch(`https://api.bomboonsan.com/event/id/${id}`);
+      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
       const jsonData = await response.json();
       setDataEvent(jsonData);
       console.log(jsonData)

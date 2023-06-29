@@ -9,7 +9,7 @@ import {stateAnswer} from '../../state/stateAnswer'
 // Components FOR Dev Module
 
 export default function Mockup({ pageData , questionData , questionIndex }) {
-  const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
+  const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
   
 
   const [answerImages, setAnswerImages] = useState([]);

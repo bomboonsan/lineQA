@@ -33,7 +33,7 @@ export default function Dashboard() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://api.bomboonsan.com/setting/id/648d0250cd1e81175e49605f`);
+      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/setting/id/648d0250cd1e81175e49605f`);
       const jsonData = await response.json();
       setValue(jsonData.termsConditions);
       // console.log(jsonData)
@@ -60,8 +60,8 @@ export default function Dashboard() {
       const bodyJson = {
         "termsConditions" : value,
       }
-      // const response = await fetch('https://api.bomboonsan.com/contest/add', {
-      const response = await fetch('https://api.bomboonsan.com/setting/id/648d0250cd1e81175e49605f', {
+      // const response = await fetch('https://boschthailandbackend.bomboonsan.com/contest/add', {
+      const response = await fetch('https://boschthailandbackend.bomboonsan.com/setting/id/648d0250cd1e81175e49605f', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

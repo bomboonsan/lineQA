@@ -51,7 +51,7 @@ export default function ContestElement( {pageData} ) {
           }],
         }
         try {
-          const response = await fetch('https://api.bomboonsan.com/user/add', {
+          const response = await fetch('https://boschthailandbackend.bomboonsan.com/user/add', {
               method: 'POST',
               headers: {
               'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export default function ContestElement( {pageData} ) {
     
     
       const submitUser = async (id , contestOldData) => {
-        console.log(`https://api.bomboonsan.com/user/id/${id}`)
+        console.log(`https://boschthailandbackend.bomboonsan.com/user/id/${id}`)
         const newContestData = {
             "contest_id" : pageData._id,
             "campaign" : pageData.campaign,
@@ -101,7 +101,7 @@ export default function ContestElement( {pageData} ) {
           "contestData" : listContestData,
         }
         try {
-          const response = await fetch(`https://api.bomboonsan.com/user/id/${id}`, {
+          const response = await fetch(`https://boschthailandbackend.bomboonsan.com/user/id/${id}`, {
               method: 'PUT',
               headers: {
               'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ export default function ContestElement( {pageData} ) {
     
       const checkToken = async (token) => {
         try {
-          const response = await fetch(`https://api.bomboonsan.com/user/accesstoken/${token}`);
+          const response = await fetch(`https://boschthailandbackend.bomboonsan.com/user/accesstoken/${token}`);
           const jsonData = await response.json();
           return jsonData;
         } catch (error) {
@@ -171,7 +171,7 @@ export default function ContestElement( {pageData} ) {
             }
 
             try {
-            const response = await fetch('https://api.bomboonsan.com/upload/image', {
+            const response = await fetch('https://boschthailandbackend.bomboonsan.com/upload/image', {
                 method: 'POST',
                 body: formData,
             });
@@ -189,7 +189,7 @@ export default function ContestElement( {pageData} ) {
     const removeImage = async (url) => {
         url = url.replace('images/','')
         try {
-        const response = await fetch(`https://api.bomboonsan.com/upload/image/delete/${url}`, {
+        const response = await fetch(`https://boschthailandbackend.bomboonsan.com/upload/image/delete/${url}`, {
             method: 'DELETE',
         })
         console.log(response)

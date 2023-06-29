@@ -37,7 +37,7 @@ export default function Home({ Component, pageProps }) {
         "username": username,
         "password": password
       };
-      const response = await fetch('https://api.bomboonsan.com/admin/login', {
+      const response = await fetch('https://boschthailandbackend.bomboonsan.com/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

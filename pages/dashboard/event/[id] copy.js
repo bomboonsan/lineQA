@@ -2,8 +2,6 @@ import Layout from '../../../components/dashboard/template/layout';
 import '../../../app/globals.scss'
 import Image from 'next/image'
 import Link from 'next/link';
-import { CSVLink } from "react-csv";
-
 import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router'
@@ -19,17 +17,12 @@ export default function Dashboard() {
 
   const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
 
-
-  const [golalIdEvent, setGolalIdEvent] = useState(null);
-
   const [data, setData] = useState([]);
   const [dataEvent, setDataEvent] = useState([]);
 
   useEffect(() => {
     fetchData();
     fetchDataEvent();
-
-    setGolalIdEvent(id)
   }, [id]);
 
 
@@ -56,48 +49,6 @@ export default function Dashboard() {
       console.error('Error:', error);
     }
   };
-  
-  let dataEventLoop = [];
-  data.map((value, index) => {
-    
-    let userArr = value;
-
-    let eventDataArr = value.eventData;
-
-    eventDataArr.map((value, index) => {
-    
-      const dataItem = {
-        'pictureUrl' : userArr.pictureUrl,
-        'displayName' : userArr.displayName,
-        'userId' : userArr._id,
-        'event_id' : value.event_id,
-        'point' : value.point,
-        'date' : value.date
-      }
-
-      if (golalIdEvent == value.event_id && value.point[0] !== null) {
-        dataEventLoop.push(dataItem)
-      }
-  
-    })
-
-  })
-  console.log(dataEventLoop)
-
-  // Sort ข้อความด้วย Date วันที่
-  dataEventLoop.sort((a, b) => new Date(a.date) - new Date(b.date));
-  const revertedDataEventLoop = dataEventLoop.reverse();
-
-
-
-  const headers = [
-    { label: "DisplayName", key: "displayName" },
-    { label: "Point", key: "point" },
-    { label: "Date", key: "date" }
-  ];
-
-
-
 
 
   if (!data) {
@@ -123,10 +74,10 @@ export default function Dashboard() {
           <Table.Column>วันที่เล่นล่าสุด</Table.Column>
         </Table.Header>
         <Table.Body>
-          {revertedDataEventLoop.map((value, index) => (
+          {data.map((value, index) => (
             <Table.Row key={index}>
               <Table.Cell>
-                <Link href={`/dashboard/user/${value.userId}`} >
+                <Link href={`/dashboard/user/${value._id}`} >
                 <img
                   className='rounded-xl shadow cursor-pointer'
                   width={75} 
@@ -137,16 +88,28 @@ export default function Dashboard() {
                 </Link>
               </Table.Cell>
               <Table.Cell>
-                <Link href={`/dashboard/user/${value.userId}`} >
+                <Link href={`/dashboard/user/${value._id}`} >
                 {value.displayName}
                 </Link>
               </Table.Cell>
               <Table.Cell>
-                {value.point}
+                { value.eventData.map((item,index) => (
+                    <>
+                      {item.event_id == id && item.point !== [null] ? (
+                        <span className='pointoftable'>
+                        {item.point}
+                        </span>
+                      ): (
+                        <>
+                        </>
+                      )}
+                    </>
+                  ))
+                }
               </Table.Cell>
               <Table.Cell>
                 {
-                  format(new Date(value.date), 'dd MMMM yyyy')
+                  format(new Date(value.updatedAt), 'dd MMMM yyyy')
                 }
               </Table.Cell>
             </Table.Row>
@@ -172,18 +135,9 @@ export default function Dashboard() {
             <p className='text-lg'><strong>Event Title</strong> : {dataEvent.title}</p>
             <p className='text-base my-3'><strong>Event Description</strong> : {dataEvent.description}</p>
           </header>
-          <div className='export_csv'>
-            <CSVLink 
-              data={revertedDataEventLoop} 
-              headers={headers}
-              filename={`ข้อมูล-${dataEvent.title}.csv`}
-            >
-              Export CSV
-            </CSVLink>
-          </div>
           <section className='p-3'>
             <RenderTable />
-          </section>          
+          </section>
       </main>
     </Layout>
   )

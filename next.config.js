@@ -18,6 +18,10 @@ const nextConfig = {
             protocol: 'https',
             hostname: 'api.bomboonsan.com',
           },
+          {
+            protocol: 'https',
+            hostname: 'boschthailandbackend.bomboonsan.com',
+          },
         ],
     },
 }

@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 import { Button , Modal , Text , Table , Tooltip , Row, Col } from "@nextui-org/react";
 
 export default function Dashboard() {
-  const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
+  const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
 
   const [data, setData] = useState([]);
 
@@ -18,7 +18,7 @@ export default function Dashboard() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://api.bomboonsan.com/user`);
+      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/user`);
       const jsonData = await response.json();
       setData(jsonData);
       console.log(jsonData)
@@ -31,7 +31,7 @@ export default function Dashboard() {
     const confirmed = window.confirm('Are you sure you want to delete this question?');
     if (confirmed) {
       try {
-        const response = await fetch(`https://api.bomboonsan.com/event/id/${id}`, {
+        const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`, {
           method: 'DELETE',
         });
   

@@ -125,7 +125,7 @@ export default function QuestionGroup( {pageData} ) {
           }],
         }
         try {
-          const response = await fetch('https://api.bomboonsan.com/user/add', {
+          const response = await fetch('https://boschthailandbackend.bomboonsan.com/user/add', {
               method: 'POST',
               headers: {
               'Content-Type': 'application/json',
@@ -167,7 +167,7 @@ export default function QuestionGroup( {pageData} ) {
           "eventData" : listEventData,
         }
         try {
-          const response = await fetch(`https://api.bomboonsan.com/user/id/${id}`, {
+          const response = await fetch(`https://boschthailandbackend.bomboonsan.com/user/id/${id}`, {
               method: 'PUT',
               headers: {
               'Content-Type': 'application/json',
@@ -187,7 +187,7 @@ export default function QuestionGroup( {pageData} ) {
     
       const checkToken = async (token) => {
         try {
-          const response = await fetch(`https://api.bomboonsan.com/user/accesstoken/${token}`);
+          const response = await fetch(`https://boschthailandbackend.bomboonsan.com/user/accesstoken/${token}`);
           const jsonData = await response.json();
           return jsonData;
         } catch (error) {

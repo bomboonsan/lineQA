@@ -213,7 +213,7 @@ export default function Container({ Component, pageProps }) {
       alert('กรุณาเลือกรูปผลลัพท์ล่าสุด')
     } else {
       try {
-        const response = await fetch('https://api.bomboonsan.com/event/add', {
+        const response = await fetch('https://boschthailandbackend.bomboonsan.com/event/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

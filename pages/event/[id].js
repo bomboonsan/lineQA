@@ -15,7 +15,7 @@ import ContainerPage from '../../components/event/Container'
 export default function EventId() {
   const router = useRouter()
   const { id } = router.query;
-  const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
+  const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function EventId() {
   
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://api.bomboonsan.com/event/id/${id}`);
+      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {

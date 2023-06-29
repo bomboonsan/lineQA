@@ -21,13 +21,13 @@ export default function EventId() {
   // const contest = router.query.contest;
   const [id, setId] = useState(null);
   const [contest, setContest] = useState(null);
-  const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
+  const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
   const [data, setData] = useState({});
 
 
   useEffect(() => {
     console.log(window.location.href)
-    const eventIdSplit = window.location.href.split("idevent");
+    const eventIdSplit = window.location.href.split("liff.state=%23event");
     const eventID = eventIdSplit[1]
     if (eventID !== null && eventID !== undefined) {
       setId(eventID)
@@ -36,7 +36,7 @@ export default function EventId() {
       
       
     }
-    const contestIdSplit = window.location.href.split("idcontest");
+    const contestIdSplit = window.location.href.split("liff.state=%23contest");
     const contestID = contestIdSplit[1]
     if (contestID !== null && contestID !== undefined) {
       setContest(contestID)
@@ -63,7 +63,7 @@ export default function EventId() {
   
   // const fetchData = async () => {
   //   try {
-  //     const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
+  //     const response = await fetch(`https://api.bomboonsan.com/event/id/${id}`);
   //     const jsonData = await response.json();
   //     setData(jsonData);
   //   } catch (error) {
@@ -72,7 +72,7 @@ export default function EventId() {
   // };
   // const fetchDataContest = async () => {
   //   try {
-  //     const response = await fetch(`https://boschthailandbackend.bomboonsan.com/contest/id/${contest}`);
+  //     const response = await fetch(`https://api.bomboonsan.com/contest/id/${contest}`);
   //     const jsonData = await response.json();
   //     setData(jsonData);
   //   } catch (error) {
@@ -86,7 +86,7 @@ export default function EventId() {
   const fetchData_ID = async (eventID) => {
     console.log(eventID)
     try {
-      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${eventID}`);
+      const response = await fetch(`https://api.bomboonsan.com/event/id/${eventID}`);
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
@@ -95,7 +95,7 @@ export default function EventId() {
   };
   const fetchDataContest_ID = async (contestID) => {
     try {
-      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/contest/id/${contestID}`);
+      const response = await fetch(`https://api.bomboonsan.com/contest/id/${contestID}`);
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
@@ -137,7 +137,7 @@ export default function EventId() {
       />       
       <main className="">
         
-      {id !== null ? (
+        {id !== null ? (
           <ContainerPage pageData={data} />
         ) : (
           <ContainerPageContest pageData={data} />

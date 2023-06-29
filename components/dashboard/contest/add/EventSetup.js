@@ -30,7 +30,7 @@ export default function EventSetup() {
   console.log(globalContest) 
 
   // prefix
-  const [prefixImg, setPrefixImg] = useState('https://api.bomboonsan.com/');
+  const [prefixImg, setPrefixImg] = useState('https://boschthailandbackend.bomboonsan.com/');
     // useState
   const [longText, setLongText] = useState('');
   const [dataEvent, setDataevent] = useState({});
@@ -73,7 +73,7 @@ export default function EventSetup() {
       await removeImage(urlThumbnail)
     }
     try {
-      const response = await fetch('https://api.bomboonsan.com/upload/image', {
+      const response = await fetch('https://boschthailandbackend.bomboonsan.com/upload/image', {
         method: 'POST',
         body: formData,
       });
@@ -95,7 +95,7 @@ export default function EventSetup() {
   const removeImage = async (url) => {
     url = url.replace('images/','')
     try {
-      const response = await fetch(`https://api.bomboonsan.com/upload/image/delete/${url}`, {
+      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/upload/image/delete/${url}`, {
         method: 'DELETE',
       })
       console.log(response)
@@ -116,8 +116,8 @@ export default function EventSetup() {
       alert('กรุณาเลือกรูป Thumbnail')
     } else {
       try {
-        // const response = await fetch('https://api.bomboonsan.com/contest/add', {
-        const response = await fetch('https://api.bomboonsan.com/contest/add', {
+        // const response = await fetch('https://boschthailandbackend.bomboonsan.com/contest/add', {
+        const response = await fetch('https://boschthailandbackend.bomboonsan.com/contest/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

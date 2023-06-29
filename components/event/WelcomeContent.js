@@ -24,7 +24,7 @@ export default function Content( {pageData} ) {
     // useState
     const [dataUser, setDataUser] = useState({});
 
-    const [prefixUrl, setPrefixUrl] = useState("https://api.bomboonsan.com/");
+    const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
     console.log(dataUser)
 
 

@@ -44,7 +44,7 @@ export default function Dashboard() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://api.bomboonsan.com/event`);
+      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event`);
       const jsonData = await response.json();
       setData(jsonData);
       console.log(jsonData)
@@ -57,7 +57,7 @@ export default function Dashboard() {
     const confirmed = window.confirm('Are you sure you want to delete this question?');
     if (confirmed) {
       try {
-        const response = await fetch(`https://api.bomboonsan.com/event/id/${id}`, {
+        const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`, {
           method: 'DELETE',
         });
   

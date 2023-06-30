@@ -1,3 +1,4 @@
+"use client";
 import '../app/globals.scss'
 import { useState, useEffect } from 'react';
 import Image from 'next/image'
@@ -7,12 +8,12 @@ import { useRouter } from 'next/router';
 import Head from 'next/head'
 
 
-export default function Result() {
+export default function Result({ id, name, point }) {
   const router = useRouter()
 
-  const id = router.query.id;
-  const userName = router.query.name;
-  const userPoint = router.query.point;
+  // const id = router.query.id;
+  // const userName = router.query.name;
+  // const userPoint = router.query.point;
 
 
   const startPageUrl = `https://liff.line.me/1661407578-X6ro31ow?id=${id}`;
@@ -64,7 +65,7 @@ export default function Result() {
   useEffect(() => {
     
 
-    if (results && userPoint) {
+    if (results && point) {
 
       // แยก arr เอาเฉพาะ pointMin, pointMax
       const pageDataResults = [...results]
@@ -72,18 +73,18 @@ export default function Result() {
       // setNewResultPoint(modifiedArray)
 
       // เปรียบเทียบค่าจาก user และผลลัพท์ เพื่อหา index ของผลลัพท์ที่จะต้องแสดง
-      const index = checkNumberInRange(modifiedArray, Number(userPoint));
+      const index = checkNumberInRange(modifiedArray, Number(point));
       if (index > 0) {
         setIndexResult(index)
       } else {
         setIndexResult(0)
       }
 
-      console.log('userPoint : '+userPoint)
+      console.log('userPoint : '+point)
 
     }
 
-  }, [results,userPoint]);
+  }, [results,point]);
 
   const nativeShare = ()=> {
     if (navigator.share) {
@@ -109,7 +110,7 @@ export default function Result() {
   return (
     <>
       <Head>
-        <title>คุณ {userName} ได้ {userPoint} คะแนน</title>
+        <title>คุณ {name} ได้ {point} คะแนน</title>
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:image" content={prefixUrl+results[indexResult].resultImageUrl} />
         <meta property="og:description" content="Thank you for playing" />
@@ -126,7 +127,7 @@ export default function Result() {
         <main className="mt-10">
           <header className='px-3 mb-3'>
             <h1 className='text-4xl font-bold mb-4 text-center'>Thank you for playing</h1>
-            <p className='text-xl text-center font-bold'>คุณ {userName}</p>
+            <p className='text-xl text-center font-bold'>คุณ {name}</p>
             <p className='text-lg text-center'>Answer Generated</p>
           </header>
           {results && 
@@ -183,4 +184,9 @@ export default function Result() {
 }
 
 
-
+export async function getServerSideProps(context) {
+  const { id, name, point } = context.query;
+  return {
+    props: { id, name, point },
+  };
+}

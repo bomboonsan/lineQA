@@ -15,18 +15,23 @@ export default function Result({ id, name, point }) {
   // const userName = router.query.name;
   // const userPoint = router.query.point;
 
-
-  const startPageUrl = `https://liff.line.me/1661407578-X6ro31ow?id=${id}`;
-
-  const [data, setData] = useState({});
-  const [results, setResults] = useState(null);
-
+  const startPageUrl = `https://liff.line.me/1661407578-X6ro31ow?id=${id}`;   
   const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
-
-
-
   const [urlAddFriend, setUrlAddFriend] = useState("https://developers.line.biz/console/");
-   
+  const [results, setResults] = useState(null);
+  const [indexResult, setIndexResult] = useState(0);
+  const [urlImage, setUrlImage] = useState('https://boschthailand.aclick.asia/images/logo.png');
+
+
+  function checkNumberInRange(array, point) {
+    for (let i = 0; i < array.length; i++) {
+      const { pointMin, pointMax } = array[i];
+      if (Number(point) >= Number(pointMin) && Number(point) <= Number(pointMax)) {
+        return i; // Return the index if the number is within the range
+      }
+    }
+    return -1; // Return -1 if the number is not within any range
+  }
 
   useEffect(() => {
     if (id !== undefined ) {
@@ -38,30 +43,13 @@ export default function Result({ id, name, point }) {
     try {
       const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
       const jsonData = await response.json();
-      setData(jsonData);
       setResults(jsonData.results);
       console.log(jsonData.results)
     } catch (error) {
       console.error('Error:', error);
     }
   };
-
-  console.log(results)
-
   
-  function checkNumberInRange(array, point) {
-    for (let i = 0; i < array.length; i++) {
-      const { pointMin, pointMax } = array[i];
-      if (Number(point) >= Number(pointMin) && Number(point) <= Number(pointMax)) {
-        return i; // Return the index if the number is within the range
-      }
-    }
-    return -1; // Return -1 if the number is not within any range
-  }
-
-  // checkNumberInRange(rangeArray, globolUser.point);
-
-  const [indexResult, setIndexResult] = useState(0);
   useEffect(() => {
     
 
@@ -100,20 +88,40 @@ export default function Result({ id, name, point }) {
     }
   }
 
+  const getImageUrl = async () => {
+    const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
+    const jsonData = await response.json();
+    const resultsData = jsonData.results
+    // แยก arr เอาเฉพาะ pointMin, pointMax
+    const pageDataResults = [...resultsData]
+    const modifiedArray = pageDataResults.map(({ pointMin, pointMax }) => ({ pointMin, pointMax }));
+    // setNewResultPoint(modifiedArray)
 
-  if(!results) {
-    return false
+    // เปรียบเทียบค่าจาก user และผลลัพท์ เพื่อหา index ของผลลัพท์ที่จะต้องแสดง
+    const index = checkNumberInRange(modifiedArray, Number(point));
+    if (index > 0) {
+      console.log(prefixUrl+resultsData[index].resultImageUrl)
+      setUrlImage(prefixUrl+resultsData[index].resultImageUrl)
+      return prefixUrl+resultsData[index].resultImageUrl
+    } else {
+      console.log(prefixUrl+resultsData[0].resultImageUrl)
+      setUrlImage(prefixUrl+resultsData[0].resultImageUrl)
+      return prefixUrl+resultsData[0].resultImageUrl
+    }
   }
 
+  const title = `คุณ ${name} ได้ ${point} คะแนน`;
+  const description = `Thank you for playing`;
+  const imageUrl = getImageUrl();
   
   
   return (
-    <>
+    <div>
       <Head>
-        <title>คุณ {name} ได้ {point} คะแนน</title>
+        <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:image" content={prefixUrl+results[indexResult].resultImageUrl} />
-        <meta property="og:description" content="Thank you for playing" />
+        <meta property="og:image" content={urlImage} />
+        <meta property="og:description" content={description} />
       </Head>
       
       <div id='appWrap'>
@@ -138,7 +146,7 @@ export default function Result({ id, name, point }) {
               </p>
               <div className='mt-4'>
                 <img
-                        src={prefixUrl+results[indexResult].resultImageUrl}
+                        src={urlImage}
                         alt="Mockup"
                         className='block mx-auto'
                         // layout="fill"
@@ -179,14 +187,21 @@ export default function Result({ id, name, point }) {
           </section>
         </main>
       </div>
-    </>
+    </div>
   )
 }
 
 
 export async function getServerSideProps(context) {
   const { id, name, point } = context.query;
+  // const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
+  // const jsonData = await response.json();
+  // const results = jsonData.results
+
   return {
     props: { id, name, point },
   };
+
+
+  
 }

@@ -13,6 +13,7 @@
     "@line/liff": "^2.22.1",
     "@nextui-org/react": "1.0.0-beta.13",
     "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
     "date-fns": "^2.30.0",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",

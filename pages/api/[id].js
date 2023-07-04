@@ -16,4 +16,4 @@ export default async function handler(req, res) {
       console.error('Error fetching external API:', error.message);
       res.status(500).json({ error: 'Internal Server Error' });
     }
-  }
+}

@@ -9,7 +9,7 @@ import Head from 'next/head'
 
 import axios from 'axios';
 
-export default function Result({ id, name, point , results , imageUrlResult , resultsIndex }) {
+export default function Result({ id, name, point , data , results , imageUrlResult , resultsIndex }) {
   const router = useRouter()
 
   const startPageUrl = `https://liff.line.me/1661407578-X6ro31ow#idevent${id}`;   
@@ -27,6 +27,9 @@ export default function Result({ id, name, point , results , imageUrlResult , re
     return -1; // Return -1 if the number is not within any range
   }
 
+
+  // console.log(data.campaign)
+
   
 
   const nativeShare = ()=> {
@@ -43,8 +46,8 @@ export default function Result({ id, name, point , results , imageUrlResult , re
     }
   }
 
-  const title = `คุณ ${name} ได้ ${point} คะแนน`;
-  const description = results[resultsIndex].resultText;
+  const title = results[resultsIndex].resultText;
+  const description = `ร่วมสนุกกับ ${data.campaign}`;
   
 
   return (
@@ -155,7 +158,7 @@ export async function getServerSideProps(context) {
 
 
   return {
-    props: { id, name, point , results , imageUrlResult , resultsIndex },
+    props: { id, name, point , data , results , imageUrlResult , resultsIndex },
   };
 
 

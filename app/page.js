@@ -37,11 +37,11 @@ export default function Home({ Component, pageProps }) {
         "username": username,
         "password": password
       };
-      const response = await fetch('https://boschthailandbackend.bomboonsan.com/admin/login', {
+      const response = await fetch('/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },        
+        },
         // body: JSON.stringify({ value: inputValue }),
         body: JSON.stringify(bodyJson),
       });
@@ -49,10 +49,10 @@ export default function Home({ Component, pageProps }) {
       const data = await response.json();
 
       if (response.ok) {
-        // Success, handle the response here
-        console.log('Request sent successfully!');
-        // window.location.reload();
-        console.log(data)
+        // // Success, handle the response here
+        // console.log('Request sent successfully!');
+        // // window.location.reload();
+        // console.log(data)
 
         // Set Token to Token
         const expirationDate = new Date();

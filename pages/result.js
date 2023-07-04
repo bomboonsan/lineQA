@@ -12,16 +12,9 @@ import axios from 'axios';
 export default function Result({ id, name, point , results , imageUrlResult , resultsIndex }) {
   const router = useRouter()
 
-  // const id = router.query.id;
-  // const userName = router.query.name;
-  // const userPoint = router.query.point;
-
   const startPageUrl = `https://liff.line.me/1661407578-X6ro31ow?id=${id}`;   
   const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
   const [urlAddFriend, setUrlAddFriend] = useState("https://developers.line.biz/console/");
-  // const [results, setResults] = useState(null);
-  const [indexResult, setIndexResult] = useState(0);
-  const [urlImage, setUrlImage] = useState('https://boschthailand.aclick.asia/images/logo.png');
 
 
   function checkNumberInRange(array, point) {
@@ -34,47 +27,7 @@ export default function Result({ id, name, point , results , imageUrlResult , re
     return -1; // Return -1 if the number is not within any range
   }
 
-  // useEffect(() => {
-  //   if (id !== undefined ) {
-  //     fetchData();
-
-  //   }
-  // }, [id]);
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
-  //     const jsonData = await response.json();
-  //     setResults(jsonData.results);
-  //     console.log(jsonData.results)
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
   
-  useEffect(() => {
-    
-
-    if (results && point) {
-
-      // แยก arr เอาเฉพาะ pointMin, pointMax
-      const pageDataResults = [...results]
-      const modifiedArray = pageDataResults.map(({ pointMin, pointMax }) => ({ pointMin, pointMax }));
-      // setNewResultPoint(modifiedArray)
-
-      // เปรียบเทียบค่าจาก user และผลลัพท์ เพื่อหา index ของผลลัพท์ที่จะต้องแสดง
-      const index = checkNumberInRange(modifiedArray, Number(point));
-      if (index > 0) {
-        setIndexResult(index)
-      } else {
-        setIndexResult(0)
-      }
-
-      console.log('userPoint : '+point)
-
-    }
-
-  }, [results,point]);
 
   const nativeShare = ()=> {
     if (navigator.share) {
@@ -90,39 +43,15 @@ export default function Result({ id, name, point , results , imageUrlResult , re
     }
   }
 
-  const getImageUrl = async () => {
-    const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
-    const jsonData = await response.json();
-    const resultsData = jsonData.results
-    // แยก arr เอาเฉพาะ pointMin, pointMax
-    const pageDataResults = [...resultsData]
-    const modifiedArray = pageDataResults.map(({ pointMin, pointMax }) => ({ pointMin, pointMax }));
-    // setNewResultPoint(modifiedArray)
-
-    // เปรียบเทียบค่าจาก user และผลลัพท์ เพื่อหา index ของผลลัพท์ที่จะต้องแสดง
-    const index = checkNumberInRange(modifiedArray, Number(point));
-    if (index > 0) {
-      console.log(prefixUrl+resultsData[index].resultImageUrl)
-      setUrlImage(prefixUrl+resultsData[index].resultImageUrl)
-      return prefixUrl+resultsData[index].resultImageUrl
-    } else {
-      console.log(prefixUrl+resultsData[0].resultImageUrl)
-      setUrlImage(prefixUrl+resultsData[0].resultImageUrl)
-      return prefixUrl+resultsData[0].resultImageUrl
-    }
-  }
-
   const title = `คุณ ${name} ได้ ${point} คะแนน`;
-  // const description = `results[resultsIndex].resultText`;
   const description = results[resultsIndex].resultText;
-  const imageUrl = getImageUrl();
   
 
   return (
     <div>
       <Head>
         <title>{title}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/favicon.ico" />
         <meta property="og:image" content={prefixUrl+imageUrlResult} />
         <meta property="og:description" content={description} />
       </Head>
@@ -197,14 +126,8 @@ export default function Result({ id, name, point , results , imageUrlResult , re
 
 export async function getServerSideProps(context) {
   const { id, name, point } = context.query;
-  // const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
-  // const jsonData = await response.json();
-  // const results = jsonData.results
 
-  // const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
-  // const data = await response.json();
-
-  const response = await axios.get(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
+  const response = await axios.get(`https://boschthailand.aclick.asia/api/${id}`);
   const data = response.data;
   
   // 

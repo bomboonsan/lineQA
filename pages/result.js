@@ -14,7 +14,7 @@ export default function Result({ id, name, point , results , imageUrlResult , re
 
   const startPageUrl = `https://liff.line.me/1661407578-X6ro31ow?id=${id}`;   
   const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
-  const [urlAddFriend, setUrlAddFriend] = useState("https://developers.line.biz/console/");
+  const [urlAddFriend, setUrlAddFriend] = useState("https://lin.ee/ZlDeptH");
 
 
   function checkNumberInRange(array, point) {

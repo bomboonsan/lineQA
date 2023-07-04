@@ -12,7 +12,7 @@ import axios from 'axios';
 export default function Result({ id, name, point , results , imageUrlResult , resultsIndex }) {
   const router = useRouter()
 
-  const startPageUrl = `https://liff.line.me/1661407578-X6ro31ow#id=${id}`;   
+  const startPageUrl = `https://liff.line.me/1661407578-X6ro31ow#idevent${id}`;   
   const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
   const [urlAddFriend, setUrlAddFriend] = useState("https://lin.ee/ZlDeptH");
 

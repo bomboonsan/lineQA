@@ -7,8 +7,9 @@ import { useRouter } from 'next/router';
 
 import Head from 'next/head'
 
+import axios from 'axios';
 
-export default function Result({ id, name, point }) {
+export default function Result({ id, name, point , results , imageUrlResult , resultsIndex }) {
   const router = useRouter()
 
   // const id = router.query.id;
@@ -18,7 +19,7 @@ export default function Result({ id, name, point }) {
   const startPageUrl = `https://liff.line.me/1661407578-X6ro31ow?id=${id}`;   
   const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
   const [urlAddFriend, setUrlAddFriend] = useState("https://developers.line.biz/console/");
-  const [results, setResults] = useState(null);
+  // const [results, setResults] = useState(null);
   const [indexResult, setIndexResult] = useState(0);
   const [urlImage, setUrlImage] = useState('https://boschthailand.aclick.asia/images/logo.png');
 
@@ -33,22 +34,23 @@ export default function Result({ id, name, point }) {
     return -1; // Return -1 if the number is not within any range
   }
 
-  useEffect(() => {
-    if (id !== undefined ) {
-      fetchData();
-    }
-  }, [id]);
+  // useEffect(() => {
+  //   if (id !== undefined ) {
+  //     fetchData();
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
-      const jsonData = await response.json();
-      setResults(jsonData.results);
-      console.log(jsonData.results)
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+  //   }
+  // }, [id]);
+
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
+  //     const jsonData = await response.json();
+  //     setResults(jsonData.results);
+  //     console.log(jsonData.results)
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // };
   
   useEffect(() => {
     
@@ -77,7 +79,7 @@ export default function Result({ id, name, point }) {
   const nativeShare = ()=> {
     if (navigator.share) {
       navigator.share({
-        title: 'Thank you for playing',
+        title: description,
         url: window.location.href
       }).then(() => {
         console.log('Thanks for sharing!');
@@ -111,16 +113,17 @@ export default function Result({ id, name, point }) {
   }
 
   const title = `คุณ ${name} ได้ ${point} คะแนน`;
-  const description = `Thank you for playing`;
+  // const description = `results[resultsIndex].resultText`;
+  const description = results[resultsIndex].resultText;
   const imageUrl = getImageUrl();
   
-  
+
   return (
     <div>
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:image" content={urlImage} />
+        <meta property="og:image" content={prefixUrl+imageUrlResult} />
         <meta property="og:description" content={description} />
       </Head>
       
@@ -142,11 +145,11 @@ export default function Result({ id, name, point }) {
           <section className='p-3'>
             <div className='result-box'>
               <p className='text-center'>
-                {results[indexResult].resultText}
+                {description}
               </p>
               <div className='mt-4'>
                 <img
-                        src={urlImage}
+                        src={prefixUrl+imageUrlResult}
                         alt="Mockup"
                         className='block mx-auto'
                         // layout="fill"
@@ -198,8 +201,38 @@ export async function getServerSideProps(context) {
   // const jsonData = await response.json();
   // const results = jsonData.results
 
+  // const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
+  // const data = await response.json();
+
+  const response = await axios.get(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
+  const data = response.data;
+  
+  // 
+  const pageDataResults = [...data.results]
+  const modifiedArray = pageDataResults.map(({ pointMin, pointMax }) => ({ pointMin, pointMax }));
+  // setNewResultPoint(modifiedArray)
+
+  // เปรียบเทียบค่าจาก user และผลลัพท์ เพื่อหา index ของผลลัพท์ที่จะต้องแสดง
+  const index = checkNumberInRange(modifiedArray, Number(point));
+  function checkNumberInRange(array, point) {
+    for (let i = 0; i < array.length; i++) {
+      const { pointMin, pointMax } = array[i];
+      if (Number(point) >= Number(pointMin) && Number(point) <= Number(pointMax)) {
+        return i; // Return the index if the number is within the range
+      }
+    }
+    return 0; // Return -1 if the number is not within any range
+  }
+
+
+  // 
+  const results = data.results
+  const imageUrlResult = pageDataResults[index].resultImageUrl
+  const resultsIndex = index
+
+
   return {
-    props: { id, name, point },
+    props: { id, name, point , results , imageUrlResult , resultsIndex },
   };
 
 

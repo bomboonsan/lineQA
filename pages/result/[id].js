@@ -56,7 +56,7 @@ export default function Start() {
         />       
         <main className="mt-10">
           <header className='px-3 mb-3'>
-            <h1 className='text-4xl font-bold mb-4 text-center'>Thank you for play</h1>
+            <h1 className='text-4xl font-bold mb-4 text-center'>Thank you for participating</h1>
             <p className='text-xl text-center font-bold'>คุณ {userName}</p>
             <p className='text-lg text-center'>Answer Generated</p>
           </header>

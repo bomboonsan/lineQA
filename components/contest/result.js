@@ -80,7 +80,7 @@ export default function Result( {pageData} ) {
       {pageData.results &&
         <main className="mt-10">
           <header className='px-3 mb-3'>
-            <h1 className='text-4xl font-bold mb-4 text-center'>Thank you for play</h1>
+            <h1 className='text-4xl font-bold mb-4 text-center'>Thank you for participating</h1>
             <p className='text-xl text-center font-bold'>คุณ {globolUser.displayName}</p>
             {/* <p className='text-xl text-center font-bold'>คะแนนที่ได้ {globolUser.point}</p> */}
             <p className='text-lg text-center'>Answer Generated</p>

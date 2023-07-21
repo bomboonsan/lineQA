@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
             />
           </header>  */}
           <Image 
-              className='w-full h-auto'
+              className='w-full h-auto mb-[50px]'
               width={800} 
               height={128} 
               src='/images/bosch_logo.png'

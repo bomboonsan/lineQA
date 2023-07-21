@@ -155,7 +155,7 @@ export default function Content( {pageData} ) {
                         className="btn btn-block btn-primary text-xl text-white rounded-[0]"
                         onClick={handleStart}
                     >
-                        เริ่มเลย
+                        Start
                     </button>
                 </div>
                 <dialog id="my_modal_3" className="modal">

@@ -203,7 +203,7 @@ export default function Container({ propDataEvent }) {
       alert('กรุณาเลือกรูปผลลัพท์ล่าสุด')
     } else {
       try {
-        const response = await fetch(`https://api.bomboonsan.com/event/update/${propDataEvent._id}`, {
+        const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/update/${propDataEvent._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'

@@ -91,20 +91,33 @@ export default function Mockup({ pageData , questionData , questionIndex }) {
                 <label 
                   className="form-check-label" 
                   htmlFor={`Answer_${index}`} // Dynamically set the htmlFor using index
-                >
-                  <div className='flex flex-wrap'>
-                    <div className='basis-2/3'>
-                      <span className='ms-2'>{item}</span>
+                >                 
+                  {answerImages[index] && 
+                    <>
+                    <div className='flex flex-wrap'>
+                      <div className='basis-2/3 w-2/3'>
+                        <span className='ms-2'>{item}</span>
+                      </div>
+                      <div className='basis-1/3 w-1/3'>
+                        <img
+                          src={prefixUrl+answerImages[index]}
+                          alt="Mockup"
+                          width={300}
+                          height={300}
+                        />
+                      </div>
                     </div>
-                    <div className='basis-1/3'>
-                      <img
-                        src={prefixUrl+answerImages[index]}
-                        alt="Mockup"
-                        width={300}
-                        height={300}
-                      />
+                    </>
+                  }
+                  {!answerImages[index] && 
+                    <>
+                    <div className='flex flex-wrap'>
+                      <div className='basis-full'>
+                        <span className='ms-2'>{item}</span>
+                      </div>
                     </div>
-                  </div>
+                    </>
+                  }
                 </label>
               </div> 
               

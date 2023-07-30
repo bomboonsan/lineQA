@@ -170,12 +170,14 @@ export default function QuestionText( props ) {
         "complete": false,
         "msg": 'กรุณาระบุคำตอบให้ครบด้วยครับ',
       }
-    } else if (urlAnswerImages.length !== inputValues.length) {
-      status = {
-        "complete": false,
-        "msg": 'กรุณาเพิ่มรูปภาพให้ครบด้วยครับ',
-      }
-    } else if (point == '' || point == null) {
+    } 
+    // else if (urlAnswerImages.length !== inputValues.length) {
+    //   status = {
+    //     "complete": false,
+    //     "msg": 'กรุณาเพิ่มรูปภาพให้ครบด้วยครับ',
+    //   }
+    // } 
+    else if (point == '' || point == null) {
       status = {
         "complete": false,
         "msg": 'กรุณาระบุคะแนน',

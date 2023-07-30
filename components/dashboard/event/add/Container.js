@@ -17,9 +17,11 @@ import {SSRProvider} from 'react-aria'
 
 // sweetalert2
 import Swal from 'sweetalert2'
-
+import { useRouter } from 'next/navigation';
 
 export default function Container({ Component, pageProps }) {
+
+  const router = useRouter()
 
   const [globalEvent, setGlobalEvent] = useRecoilState(stateEvent)
   useEffect(() => {

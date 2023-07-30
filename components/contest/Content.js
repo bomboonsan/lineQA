@@ -108,7 +108,8 @@ export default function Content( {pageData} ) {
         console.error('liff init error', error.message)
         }
         if (!liff.isLoggedIn()) {
-        liff.login();
+            const destinationUri = window.location.href;
+            liff.login( { redirectUri: destinationUri } );
         }
     }
 

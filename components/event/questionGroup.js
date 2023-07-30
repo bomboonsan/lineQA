@@ -57,16 +57,18 @@ export default function QuestionGroup( {pageData} ) {
                 
             }
         } else {
-            // authLine()
-            // // FINISH
-            // รวมคำตอบ
-            const currentTotalPoint =  sumArray(globolAnswer[countStep])
-            const newGlobolUser = {...globolUser}
-            const newPoint = Number(newGlobolUser.point) + Number(currentTotalPoint);
-            newGlobolUser.point = newPoint;
-            newGlobolUser.onPage = 'result';
-            setGlobolUser(newGlobolUser)
-            setIsFinish(true)
+            if ( checkNoSelect() ) {
+                // authLine()
+                // // FINISH
+                // รวมคำตอบ
+                const currentTotalPoint =  sumArray(globolAnswer[countStep])
+                const newGlobolUser = {...globolUser}
+                const newPoint = Number(newGlobolUser.point) + Number(currentTotalPoint);
+                newGlobolUser.point = newPoint;
+                newGlobolUser.onPage = 'result';
+                setGlobolUser(newGlobolUser)
+                setIsFinish(true)
+            }            
             
         }
         

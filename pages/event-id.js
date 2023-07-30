@@ -105,9 +105,9 @@ export default function EventId() {
   
   console.log(data)
 
-  // if(!data._id) {
-  //   return false
-  // }
+  if(!data) {
+    return false
+  }
 
   return (
     <>
@@ -129,7 +129,7 @@ export default function EventId() {
         />
       </header> */}
       <Image 
-        className='w-full h-auto'
+        className='w-full h-auto mb-[50px]'
         width={800} 
         height={128} 
         src='/images/bosch_logo.png'

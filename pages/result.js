@@ -61,7 +61,7 @@ export default function Result({ id, name, point , data , results , imageUrlResu
       
       <div id='appWrap'>
         <Image 
-          className='w-full h-auto'
+          className='w-full h-auto mb-[50px]'
           width={800} 
           height={128} 
           src='/images/bosch_logo.png'
@@ -71,7 +71,7 @@ export default function Result({ id, name, point , data , results , imageUrlResu
           <header className='px-3 mb-3'>
             <h1 className='text-4xl font-bold mb-4 text-center'>Thank you for participating</h1>
             <p className='text-xl text-center font-bold'>คุณ {name}</p>
-            <p className='text-lg text-center'>Answer Generated</p>
+            {/* <p className='text-lg text-center'>Answer Generated</p> */}
           </header>
           {results && 
           <section className='p-3'>

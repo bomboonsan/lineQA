@@ -52,7 +52,8 @@ export default function EventId() {
   const fetchData_ID = async (eventID) => {
     console.log(eventID)
     try {
-      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${eventID}`);
+      // const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${eventID}`);
+      const response = await fetch(`/api/${eventID}`);
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {

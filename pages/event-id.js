@@ -62,7 +62,7 @@ export default function EventId() {
   };
   const fetchDataContest_ID = async (contestID) => {
     try {
-      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/contest/id/${contestID}`);
+      const response = await fetch(`/api/contest/${contestID}`);
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {

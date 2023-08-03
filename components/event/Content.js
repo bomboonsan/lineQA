@@ -107,7 +107,7 @@ export default function Content( {pageData , eventID} ) {
         }
         if (!liff.isLoggedIn()) {
             const destinationUri = window.location.href;
-            const urlCallBack = `https://boschthailand.aclick.asia/event-id#${eventID}`;
+            const urlCallBack = `https://boschthailand.aclick.asia/event-id#ideven${eventID}`;
             alert(urlCallBack)
             liff.login( { redirectUri: urlCallBack } );
         }

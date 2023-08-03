@@ -12,7 +12,7 @@ import Result from './result'
 import Swal from 'sweetalert2'
 
 
-export default function Content( {pageData , eventID , dataLiff} ) {
+export default function Content( {pageData , eventID} ) {
     // Recoil
     const [globalUser, setGlobalUser] = useRecoilState(stateUser);
     useEffect(() => {
@@ -77,19 +77,12 @@ export default function Content( {pageData , eventID , dataLiff} ) {
 
         // }
 
-        // const newStateUser = {...dataUser};
-        if (dataLiff.userId == null) {
-            initializeLiff()            
-        } else {          
-            const newStateUser = {...dataUser};
-            newStateUser.accesstoken = dataLiff.userId
-            newStateUser.displayName = dataLiff.displayName
-            newStateUser.pictureUrl = dataLiff.pictureUrl
-            newStateUser.email = dataLiff.email
-            setGlobalUser(newStateUser)
+        const newStateUser = {...dataUser};
+        if (newStateUser.displayName == null) {
+            initializeLiff()
         }
 
-    }, [dataUser])
+    }, [])
 
     const initializeLiff = async() => {
         const liff = (await import('@line/liff')).default

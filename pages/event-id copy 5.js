@@ -20,12 +20,10 @@ export default function EventId() {
   // const id = router.query.id;
   // const contest = router.query.contest;
   const [id, setId] = useState(null);
-  const [contest, setContest] = useState(null);  
+  const [contest, setContest] = useState(null);
   const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
   const [data, setData] = useState(null);
   const [maineventID, setMaineventID] = useState(null);
-
-  const [dataLiff, setDataLiff] = useState(null);
 
 
   useEffect(() => {
@@ -47,7 +45,7 @@ export default function EventId() {
       fetchDataContest_ID(contestID)
     }
     
-    initializeLiff()
+
     
   }, []);
 
@@ -70,42 +68,6 @@ export default function EventId() {
       console.error('Error:', error);
     }
   };
-
-
-
-  const initializeLiff = async() => {
-    const liff = (await import('@line/liff')).default
-    try {
-        await liff.init({ liffId: '1661407578-X6ro31ow', });
-
-
-        const profile = await liff.getProfile();
-        const { displayName, pictureUrl, email , userId  } = profile;
-
-        // console.log(profile)
-
-        // const newStateUser = {...dataUser};
-        // newStateUser.accesstoken = userId
-        // newStateUser.displayName = displayName
-        // newStateUser.pictureUrl = pictureUrl
-        // newStateUser.email = email
-
-        setDataLiff({
-          'userId': userId,
-          'displayName' : displayName,
-          'pictureUrl' : pictureUrl,
-          'email' : email,
-        })
-
-    } catch (error) {
-    console.error('liff init error', error.message)
-    }
-    if (!liff.isLoggedIn()) {
-        const destinationUri = window.location.href;
-        // const urlCallBack = `https://boschthailand.aclick.asia/event-id#ideven${eventID}`;
-        liff.login( { redirectUri: destinationUri } );
-    }
-  }    
   
   console.log(data)
 
@@ -133,7 +95,7 @@ export default function EventId() {
       <main className="">
         
       {id !== null ? (
-          <ContainerPage pageData={data} eventID={maineventID} dataLiff={dataLiff} />
+          <ContainerPage pageData={data} eventID={maineventID} />
         ) : (
           <ContainerPageContest pageData={data} />
         )

@@ -12,10 +12,9 @@ import Result from './result'
 import Swal from 'sweetalert2'
 
 
-export default function Content( {pageData , eventID} ) {
+export default function Content( {pageData , eventID , dataLiff} ) {
     // Recoil
     const [globalUser, setGlobalUser] = useRecoilState(stateUser);
-    const [isLiffAuth, setIsLiffAuth] = useRecoilState(false);
     useEffect(() => {
         setDataUser(globalUser)
     }, [globalUser]);
@@ -78,10 +77,16 @@ export default function Content( {pageData , eventID} ) {
 
         // }
 
-        const newStateUser = {...dataUser};
-        if (newStateUser.displayName == null && isLiffAuth) {
-            initializeLiff()
-            setIsLiffAuth(true)
+        // const newStateUser = {...dataUser};
+        if (dataLiff.userId == null) {
+            initializeLiff()            
+        } else {          
+            const newStateUser = {...dataUser};
+            newStateUser.accesstoken = dataLiff.userId
+            newStateUser.displayName = dataLiff.displayName
+            newStateUser.pictureUrl = dataLiff.pictureUrl
+            newStateUser.email = dataLiff.email
+            setGlobalUser(newStateUser)
         }
 
     }, [dataUser])
@@ -110,7 +115,6 @@ export default function Content( {pageData , eventID} ) {
         if (!liff.isLoggedIn()) {
             const destinationUri = window.location.href;
             const urlCallBack = `https://boschthailand.aclick.asia/event-id#ideven${eventID}`;
-            alert(urlCallBack)
             liff.login( { redirectUri: urlCallBack } );
         }
     }    

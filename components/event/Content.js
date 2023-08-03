@@ -82,7 +82,7 @@ export default function Content( {pageData , eventID} ) {
             initializeLiff()
         }
 
-    }, [])
+    }, [dataUser])
 
     const initializeLiff = async() => {
         const liff = (await import('@line/liff')).default
@@ -107,7 +107,7 @@ export default function Content( {pageData , eventID} ) {
         }
         if (!liff.isLoggedIn()) {
             const destinationUri = window.location.href;
-            const urlCallBack = `https://boschthailand.aclick.asia/event-id#ideven${eventID}`;
+            const urlCallBack = `https://boschthailand.aclick.asia/event-id#idevent${eventID}`;
             liff.login( { redirectUri: urlCallBack } );
         }
     }    

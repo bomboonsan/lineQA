@@ -14,7 +14,8 @@ import Swal from 'sweetalert2'
 
 export default function Content( {pageData , eventID} ) {
     // Recoil
-    const [globalUser, setGlobalUser] = useRecoilState(stateUser)
+    const [globalUser, setGlobalUser] = useRecoilState(stateUser);
+    const [isLiffAuth, setIsLiffAuth] = useRecoilState(false);
     useEffect(() => {
         setDataUser(globalUser)
     }, [globalUser]);
@@ -78,8 +79,9 @@ export default function Content( {pageData , eventID} ) {
         // }
 
         const newStateUser = {...dataUser};
-        if (newStateUser.displayName == null) {
+        if (newStateUser.displayName == null && isLiffAuth) {
             initializeLiff()
+            setIsLiffAuth(true)
         }
 
     }, [dataUser])

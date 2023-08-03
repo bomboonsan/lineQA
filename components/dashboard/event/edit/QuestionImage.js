@@ -5,15 +5,21 @@ import { Button, Textarea , Input , Switch , Tooltip } from "@nextui-org/react";
 import { useRecoilState } from 'recoil';
 import {stateEvent} from '../../../../state/stateEvent'
 
-export default function QuestionImage( { contentQuestion , countQuestion } ) {
+export default function QuestionImage( { contentQuestion , countQuestion , propDataEvent } ) {
+  
   // console.log('ตอนนี้กำลังอยู่ที่คำถามที่ index array = '+props.countQuestion)
   const [currentQuestion, setCurrentQuestion] = useState(countQuestion);
 
   // Recoil
+
   const [globalEvent, setGlobalEvent] = useRecoilState(stateEvent)
   useEffect(() => {
-    setDataevent(globalEvent)
-  }, [globalEvent]);    
+    setDataevent(globalEvent)    
+  }, [globalEvent]);
+  console.log('propDataEvent')
+  console.log(propDataEvent)
+  console.log('test')
+  console.log(globalEvent)
 
   // prefix
   const [prefixImg, setPrefixImg] = useState('https://boschthailandbackend.bomboonsan.com/');
@@ -159,11 +165,7 @@ export default function QuestionImage( { contentQuestion , countQuestion } ) {
   // Update State
   useEffect(() => {
     updateGlobolState();
-  }, [inputValues,inputTitle,point,urlThumbnail,urlAnswerImages]);
-
-  useEffect(() => {
-    updateGlobolState();
-  }, []);
+  }, [inputValues,inputTitle,point,urlThumbnail,urlAnswerImages]);  
   
 
   const updateGlobolState = async () => {
@@ -283,7 +285,8 @@ export default function QuestionImage( { contentQuestion , countQuestion } ) {
 
     }
     
-  };
+  };  
+
 
   return (
       <div className="">

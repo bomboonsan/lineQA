@@ -11,7 +11,7 @@ import NewQuestionImage from '../add/QuestionImage';
 import NewQuestionText from '../add/QuestionText';
 import NewQuestionEmbed from '../add/QuestionEmbed';
 
-export default function QuestionSelectType( { contentQuestion , countQuestion } ) {
+export default function QuestionSelectType( { contentQuestion , countQuestion , propDataEvent } ) {
   const [currentQuestion, setCurrentQuestion] = useState(countQuestion);
   const [selectedOption, setSelectedOption] = useState('');  
   
@@ -24,7 +24,7 @@ export default function QuestionSelectType( { contentQuestion , countQuestion } 
           <QuestionText contentQuestion={contentQuestion} countQuestion={currentQuestion} />
         }
         {contentQuestion && contentQuestion.type == 'image' &&
-          <QuestionImage contentQuestion={contentQuestion} countQuestion={currentQuestion} />
+          <QuestionImage contentQuestion={contentQuestion} countQuestion={currentQuestion} propDataEvent={propDataEvent} />
         }
         {contentQuestion && contentQuestion.type == 'embed' &&
           <QuestionEmbed contentQuestion={contentQuestion} countQuestion={currentQuestion} />

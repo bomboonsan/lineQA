@@ -22,7 +22,8 @@ import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation';
 
 export default function Container({ propDataEvent }) {
-
+  console.log('propDataEvent')
+  console.log(propDataEvent)
   const router = useRouter()
 
   const [globalEvent, setGlobalEvent] = useRecoilState(stateEvent)
@@ -31,6 +32,10 @@ export default function Container({ propDataEvent }) {
     setListQuestion(globalEvent.questions)
     setListResult(globalEvent.results)
   }, [globalEvent]);  
+
+  // useEffect(() => {
+  //   setGlobalEvent(propDataEvent)
+  // }, []);  
 
   const [dataEvent, setDataevent] = useState({});
   const [listQuestion, setListQuestion] = useState([]);
@@ -170,32 +175,37 @@ export default function Container({ propDataEvent }) {
 
   const [stateStep, setStateStep] = useState(1);
   const nextStep = () => {
-    // let completeSetup = true;
-    // const newGlobolEvent = {...globalEvent}
-    // if (newGlobolEvent.campaign && newGlobolEvent.description && newGlobolEvent.thumbnail) {
-    // } else {
-    //   completeSetup = false
-    //   alert ('กรุณาระบุข้อมูลทุกช่องด้วยครับ')
-    // }
-    // // totatPoint
-    // console.log('totatPoint'+totatPoint)
+    let completeSetup = true;
+    const newGlobolEvent = {...globalEvent}
+    if (newGlobolEvent.campaign && newGlobolEvent.description && newGlobolEvent.thumbnail) {
+    } else {
+      completeSetup = false
+      alert ('กรุณาระบุข้อมูลทุกช่องด้วยครับ')
+    }
+    // totatPoint
+    console.log('totatPoint'+totatPoint)
 
-    // if (stateStep < 3 && completeSetup) {
-    //   if (stateStep == 1) {
-    //     setStateStep(stateStep+1) 
-    //   } else if (stateStep == 2 && totatPoint > 0) {
-    //     setStateStep(stateStep+1) 
-    //   } else {
-    //     const newGlobolEvent = {...globalEvent}
-    //     let lastQuestion = newGlobolEvent.questions[newGlobolEvent.questions.length - 1];
-    //     if (lastQuestion.status.complete == false) {
-    //       alert(lastQuestion.status.msg)
-    //     }
-    //   }
-    // }
+    if (stateStep < 3 && completeSetup) {
+      if (stateStep == 1) {
+        setStateStep(stateStep+1) 
+      } else if (stateStep == 2 && totatPoint > 0) {
+        setStateStep(stateStep+1) 
+      } else {
+        const newGlobolEvent = {...globalEvent}
+        let lastQuestion = newGlobolEvent.questions[newGlobolEvent.questions.length - 1];
+        if (lastQuestion.status.complete == false) {
+          alert(lastQuestion.status.msg)
+        }
+      }
+    }
+
+    // const newGlobolEvent = {...globalEvent}
+    // const newListResult = [...newGlobolEvent.results,emtryResult]
+    // newGlobolEvent.results = newListResult
+    // setGlobalEvent(newGlobolEvent)
 
     // BYPASS
-    setStateStep(stateStep+1) 
+    // setStateStep(stateStep+1) 
 
   }
   const previousStep = () => {
@@ -268,12 +278,14 @@ export default function Container({ propDataEvent }) {
         <section className={`${stateStep === 1 ? 'px-3 mb-3 animation-fadeIn relative' : 'd-none'}`}>      
           <EventSetup propDataEvent={propDataEvent} />
         </section>
+        {stateStep === 2 &&
+        <>
         <section className={`${stateStep === 2 ? 'px-3 mb-3 animation-fadeIn relative' : 'd-none'}`}>
 
           {listQuestion.map((item,index) => (
             <div key={index} className='box-widget' ref={(el) => questionItemRefs.current[index] = el}>
               <h2 className='text-4xl font-semibold mb-2'>คำถามที่ {index+1}</h2>
-              <QuestionSelectType contentQuestion={item} countQuestion={index} />
+              <QuestionSelectType contentQuestion={item} countQuestion={index} propDataEvent={propDataEvent} />
 
               {/* <QuestionImage contentQuestion={item} countQuestion={index} /> */}
             </div>
@@ -300,7 +312,9 @@ export default function Container({ propDataEvent }) {
               </div>
             </div>
           </div>
-        </section>          
+          </section>  
+        </>
+        }     
         <section className={`${stateStep === 3 ? 'px-3 mb-3 animation-fadeIn relative' : 'd-none'}`}>
           <h2 className='text-center text-3xl mb-4'>
           คะแนนทั้งหมด {totatPoint}

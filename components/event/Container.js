@@ -5,14 +5,14 @@ import { RecoilRoot } from 'recoil';
 
 import Content from './Content'
 
-export default function ContainerPage( { pageData } ) {
+export default function ContainerPage( { pageData , eventID } ) {
     if(!pageData) {
         return false
     }
     return (
         <>
             <RecoilRoot>
-                <Content pageData={pageData} />
+                <Content pageData={pageData} eventID={eventID} />
             </RecoilRoot>
         </>
     )

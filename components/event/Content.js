@@ -12,7 +12,7 @@ import Result from './result'
 import Swal from 'sweetalert2'
 
 
-export default function Content( {pageData} ) {
+export default function Content( {pageData , eventID} ) {
     // Recoil
     const [globalUser, setGlobalUser] = useRecoilState(stateUser)
     useEffect(() => {
@@ -107,7 +107,8 @@ export default function Content( {pageData} ) {
         }
         if (!liff.isLoggedIn()) {
             const destinationUri = window.location.href;
-            liff.login( { redirectUri: destinationUri } );
+            const urlCallBack = `https://boschthailand.aclick.asia/event-id#${eventID}`;
+            liff.login( { redirectUri: urlCallBack } );
         }
     }    
 

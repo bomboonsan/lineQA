@@ -23,6 +23,7 @@ export default function EventId() {
   const [contest, setContest] = useState(null);
   const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
   const [data, setData] = useState(null);
+  const [maineventID, setMaineventID] = useState(null);
 
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function EventId() {
       setId(eventID)
       console.log('eventID: '+eventID)
       fetchData_ID(eventID)
-      
+      setMaineventID(eventID)
       
     }
     const contestIdSplit = window.location.href.split("idcontest");
@@ -94,7 +95,7 @@ export default function EventId() {
       <main className="">
         
       {id !== null ? (
-          <ContainerPage pageData={data} />
+          <ContainerPage pageData={data} eventID={maineventID} />
         ) : (
           <ContainerPageContest pageData={data} />
         )

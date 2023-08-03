@@ -6,7 +6,9 @@ import { RecoilRoot } from 'recoil';
 import Content from './Content'
 
 export default function ContainerPage( { pageData } ) {
-    
+    if(!pageData) {
+        return false
+    }
     return (
         <>
             <RecoilRoot>

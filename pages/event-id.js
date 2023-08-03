@@ -22,7 +22,7 @@ export default function EventId() {
   const [id, setId] = useState(null);
   const [contest, setContest] = useState(null);
   const [prefixUrl, setPrefixUrl] = useState("https://boschthailandbackend.bomboonsan.com/");
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
 
 
   useEffect(() => {
@@ -41,47 +41,12 @@ export default function EventId() {
     if (contestID !== null && contestID !== undefined) {
       setContest(contestID)
       console.log('contestID: '+contestID)
-
       fetchDataContest_ID(contestID)
     }
     
 
     
   }, []);
-
-  // useEffect(() => {
-  //   if (id !== null) {
-  //     fetchData();
-  //   }
-  // }, [id]);  
-
-  // useEffect(() => {
-  //   if (contest !== null) {
-  //     fetchDataContest();
-  //   }
-  // }, [contest]);
-  
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/id/${id}`);
-  //     const jsonData = await response.json();
-  //     setData(jsonData);
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
-  // const fetchDataContest = async () => {
-  //   try {
-  //     const response = await fetch(`https://boschthailandbackend.bomboonsan.com/contest/id/${contest}`);
-  //     const jsonData = await response.json();
-  //     setData(jsonData);
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
-
-
-  // 
 
   const fetchData_ID = async (eventID) => {
     console.log(eventID)
@@ -118,16 +83,7 @@ export default function EventId() {
     {data &&
     
     <div id='appWrap'>
-      {/* <div className='topBar'></div>
-      <header className='mb-3 px-4'>
-        <Image 
-          className='w-1/3 h-auto'
-          width={384} 
-          height={86} 
-          src='/images/logo.png'
-          alt='LOGO'
-        />
-      </header> */}
+      
       <Image 
         className='w-full h-auto mb-[50px]'
         width={800} 
@@ -151,3 +107,5 @@ export default function EventId() {
     </>
   )
 }
+
+

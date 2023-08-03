@@ -129,9 +129,9 @@ export default function Container({ Component, pageProps }) {
     else if (Number(lastResult.pointMin) > Number(lastResult.pointMax)) {
       alert('กรุณาระบุคะแนนให้ถูกต้อง')
     }
-    else if (lastResult.resultImageUrl == '') {
-      alert('กรุณาเลือกรูปผลลัพท์นี้')
-    } 
+    // else if (lastResult.resultImageUrl == '') {
+    //   alert('กรุณาเลือกรูปผลลัพท์นี้')
+    // } 
     else {
       // เพิ่มผลลัพท์
       // let newEmtryResult = {...emtryResult}
@@ -211,9 +211,10 @@ export default function Container({ Component, pageProps }) {
     else if (lastResult.pointMin == null) {
       alert('กรุณาระบุค่าคะแนนสูงที่สุดสำหรับผลลัพท์ล่าสุด')
     }
-    else if (lastResult.resultImageUrl == '') {
-      alert('กรุณาเลือกรูปผลลัพท์ล่าสุด')
-    } else {
+    // else if (lastResult.resultImageUrl == '') {
+    //   alert('กรุณาเลือกรูปผลลัพท์ล่าสุด')
+    // } 
+    else {
       try {
         const response = await fetch('https://boschthailandbackend.bomboonsan.com/event/add', {
           method: 'POST',

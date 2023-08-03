@@ -76,15 +76,32 @@ export default function Container({ propDataEvent }) {
 
   const incrementQuestion = () => {
     const newGlobolEvent = {...globalEvent}
+    console.log(globalEvent)
     // CHECK ERROR
     // last array
-    let lastQuestion = newGlobolEvent.questions[newGlobolEvent.questions.length - 1];
-    if (lastQuestion.status.complete == false) {
-      alert(lastQuestion.status.msg)
-    } else {
+    // let lastQuestion = newGlobolEvent.questions[newGlobolEvent.questions.length - 1];
+    // if (lastQuestion.status.complete == false) {
+    //   alert(lastQuestion.status.msg)
+    // } else {
+    //   const newListQuestions = [...newGlobolEvent.questions,emtryQuestion]
+    //   newGlobolEvent.questions = newListQuestions
+    //   setGlobalEvent(newGlobolEvent)
+    // }
+
+
+    if (newGlobolEvent.questions[0].title == '') {
       const newListQuestions = [...newGlobolEvent.questions,emtryQuestion]
       newGlobolEvent.questions = newListQuestions
       setGlobalEvent(newGlobolEvent)
+    } else {
+      let lastQuestion = newGlobolEvent.questions[newGlobolEvent.questions.length - 1];
+      if (lastQuestion.status.complete == false) {
+        alert(lastQuestion.status.msg)
+      } else {
+        const newListQuestions = [...newGlobolEvent.questions,emtryQuestion]
+        newGlobolEvent.questions = newListQuestions
+        setGlobalEvent(newGlobolEvent)
+      }
     }
   }
 
@@ -128,9 +145,10 @@ export default function Container({ propDataEvent }) {
     else if (lastResult.pointMin == null) {
       alert('กรุณาระบุค่าคะแนนสูงที่สุดสำหรับผลลัพท์นี้')
     }
-    else if (lastResult.resultImageUrl == '') {
-      alert('กรุณาเลือกรูปผลลัพท์นี้')
-    } else {
+    // else if (lastResult.resultImageUrl == '') {
+    //   alert('กรุณาเลือกรูปผลลัพท์นี้')
+    // } 
+    else {
       // เพิ่มผลลัพท์
       const newListResult = [...newGlobolEvent.results,emtryResult]
       newGlobolEvent.results = newListResult
@@ -200,9 +218,10 @@ export default function Container({ propDataEvent }) {
     else if (lastResult.pointMin == null) {
       alert('กรุณาระบุค่าคะแนนสูงที่สุดสำหรับผลลัพท์ล่าสุด')
     }
-    else if (lastResult.resultImageUrl == '') {
-      alert('กรุณาเลือกรูปผลลัพท์ล่าสุด')
-    } else {
+    // else if (lastResult.resultImageUrl == '') {
+    //   alert('กรุณาเลือกรูปผลลัพท์ล่าสุด')
+    // } 
+    else {
       try {
         const response = await fetch(`https://boschthailandbackend.bomboonsan.com/event/update/${propDataEvent._id}`, {
           method: 'PUT',
@@ -233,6 +252,7 @@ export default function Container({ propDataEvent }) {
       }
     }
   }
+
 
   return (
     <SSRProvider>

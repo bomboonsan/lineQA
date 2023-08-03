@@ -35,6 +35,7 @@ export default function QuestionGroup( {pageData} ) {
         newStateUser.onPage = 'questionGruop';
         setGlobolUser(newStateUser)
     }, [pageData]);
+    
 
     useEffect(() => {
         if (isFinish) {

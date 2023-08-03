@@ -50,7 +50,7 @@ export default function Content( {pageData} ) {
     useEffect(() => {
         fetchDataTems()
     }, []);
-    const [dataTerms, setDataTerms] = useState('');
+    const [dataTerms, setDataTerms] = useState(null);
     const fetchDataTems = async () => {
         try {
             const response = await fetch(`https://boschthailandbackend.bomboonsan.com/setting/id/648d0250cd1e81175e49605f`);
@@ -113,6 +113,10 @@ export default function Content( {pageData} ) {
 
 
     if(!dataUser.displayName) {
+        return false
+    }
+
+    if(!dataTerms) {
         return false
     }
 

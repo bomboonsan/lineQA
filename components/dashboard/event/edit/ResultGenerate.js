@@ -91,6 +91,18 @@ export default function ResultGenerate(  { contentResult , countResult }  ) {
     }
   };
 
+  const removeImage = async (url) => {
+    url = url.replace('images/','')
+    try {
+      const response = await fetch(`https://boschthailandbackend.bomboonsan.com/upload/image/delete/${url}`, {
+        method: 'DELETE',
+      })
+      console.log(response)
+    } catch (error) {
+      console.error('Error image delete:', error);
+    }    
+  }
+
   // Update State
   useEffect(() => {
     updateGlobolState();

@@ -17,7 +17,7 @@ export default function Result( {pageData} ) {
   const [urlSharedExternal, setUrlSharedExternal] = useState(null);
 
 
-  const [urlAddFriend, setUrlAddFriend] = useState("https://developers.line.biz/console/");
+  const [urlAddFriend, setUrlAddFriend] = useState("https://lin.ee/ZlDeptH");
 
   // console.log(pageData)
 
